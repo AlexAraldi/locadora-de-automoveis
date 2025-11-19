@@ -46,7 +46,6 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             var result = await _mediator.Send(new SelecionarVeiculoPorIdRequest { Id = id });
             return Ok(result);
         }
-
         [HttpGet("todos")]
         public async Task<IActionResult> SelecionarTodos()
         {
