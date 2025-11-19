@@ -1,0 +1,27 @@
+﻿using FluentValidation;
+using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Validators
+{
+    public class EditarFuncionarioValidator : AbstractValidator<EditarFuncionarioRequest>
+    {
+        public EditarFuncionarioValidator()
+        {
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage("Id inválido.");
+
+            RuleFor(x => x.Nome)
+                .NotEmpty().WithMessage("O nome é obrigatório.");
+
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage("O e-mail é obrigatório.")
+                .EmailAddress().WithMessage("Formato de e-mail inválido.");
+
+            RuleFor(x => x.Cargo)
+                .NotEmpty().WithMessage("O cargo é obrigatório.");
+
+            RuleFor(x => x.Salario)
+                .GreaterThan(0).WithMessage("O salário deve ser maior que zero.");
+        }
+    }
+}
