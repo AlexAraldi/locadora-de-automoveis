@@ -1,20 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+
+// Autenticação
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAutenticacao.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Service;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Registrar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Validators;
+
+// Banco de Dados
 using LocadoraDeAutomoveis.Infraestrutura.DataBase;
+
+// Funcionário
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloFuncionario.Repositories;
+using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarTodos;
-using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar;
+
+// Cliente
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloCliente.Repositories;
+
+// Veículo
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloVeiculo.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Criar;
@@ -22,6 +32,8 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarTodos;
+
+// Grupo Automóvel
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloGrupoAutomovel.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Criar;
@@ -30,57 +42,100 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarTodos;
 
+// Condutor
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloCondutor.Repositories;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Criar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ============================================================================
+// SERVIÇOS BÁSICOS
+// ============================================================================
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// DB
+// ============================================================================
+// BANCO DE DADOS
+// ============================================================================
 builder.Services.AddDbContext<LocadoraDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
-// Autenticação
+// ============================================================================
+// AUTENTICAÇÃO
+// ============================================================================
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<AutenticarUsuarioRequestHandler>();
-
-builder.Services.AddValidatorsFromAssembly(typeof(AutenticarUsuarioRequest).Assembly);
-
-builder.Services.AddSingleton(new JwtService(builder.Configuration["Jwt:Key"]));
-
-var app = builder.Build();
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
-app.MapControllers();
-
-app.Run();
 builder.Services.AddScoped<RegistrarUsuarioRequestHandler>();
 builder.Services.AddScoped<RegistrarUsuarioValidator>();
-builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+builder.Services.AddValidatorsFromAssembly(typeof(AutenticarUsuarioRequest).Assembly);
 
+// JWT Service
+builder.Services.AddSingleton(new JwtService(builder.Configuration["Jwt:Key"]));
+
+// ============================================================================
+// FUNCIONÁRIO
+// ============================================================================
+builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 builder.Services.AddScoped<CriarFuncionarioRequestHandler>();
 builder.Services.AddScoped<EditarFuncionarioRequestHandler>();
 builder.Services.AddScoped<ExcluirFuncionarioRequestHandler>();
 builder.Services.AddScoped<SelecionarFuncionarioPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosFuncionariosRequestHandler>();
 
+// ============================================================================
+// CLIENTE
+// ============================================================================
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
+// ============================================================================
+// VEÍCULO
+// ============================================================================
 builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
-
 builder.Services.AddScoped<CriarVeiculoRequestHandler>();
 builder.Services.AddScoped<EditarVeiculoRequestHandler>();
 builder.Services.AddScoped<ExcluirVeiculoRequestHandler>();
 builder.Services.AddScoped<SelecionarVeiculoPorIdHandler>();
 builder.Services.AddScoped<SelecionarTodosVeiculosRequestHandler>();
-builder.Services.AddScoped<IGrupoAutomovelRepository, GrupoAutomovelRepository>();
 
+// ============================================================================
+// GRUPO AUTOMÓVEL
+// ============================================================================
+builder.Services.AddScoped<IGrupoAutomovelRepository, GrupoAutomovelRepository>();
 builder.Services.AddScoped<CriarGrupoAutomovelRequestHandler>();
 builder.Services.AddScoped<EditarGrupoAutomovelRequestHandler>();
 builder.Services.AddScoped<ExcluirGrupoAutomovelRequestHandler>();
 builder.Services.AddScoped<SelecionarGrupoAutomovelPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosGruposAutomovelRequestHandler>();
+
+// ============================================================================
+// CONDUTOR
+// ============================================================================
+builder.Services.AddScoped<ICondutorRepository, CondutorRepository>();
+builder.Services.AddScoped<CriarCondutorRequestHandler>();
+builder.Services.AddScoped<EditarCondutorRequestHandler>();
+builder.Services.AddScoped<ExcluirCondutorRequestHandler>();
+builder.Services.AddScoped<SelecionarCondutorPorIdRequestHandler>();
+builder.Services.AddScoped<SelecionarTodosCondutoresRequestHandler>();
+
+
+// ============================================================================
+// PIPELINE
+// ============================================================================
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
+app.Run();
