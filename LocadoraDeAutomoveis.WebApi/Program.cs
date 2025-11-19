@@ -15,6 +15,14 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloCliente.Repositories;
+using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloVeiculo.Repositories;
+using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Criar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Excluir;
+using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarPorId;
+using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarTodos;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,4 +63,10 @@ builder.Services.AddScoped<SelecionarTodosFuncionariosRequestHandler>();
 
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
+builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 
+builder.Services.AddScoped<CriarVeiculoRequestHandler>();
+builder.Services.AddScoped<EditarVeiculoRequestHandler>();
+builder.Services.AddScoped<ExcluirVeiculoRequestHandler>();
+builder.Services.AddScoped<SelecionarVeiculoPorIdHandler>();
+builder.Services.AddScoped<SelecionarTodosVeiculosRequestHandler>();
