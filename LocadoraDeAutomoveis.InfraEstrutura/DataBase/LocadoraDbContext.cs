@@ -1,5 +1,6 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
@@ -20,6 +21,8 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<GrupoAutomovel> GruposAutomovel { get; set; }
+        public DbSet<Condutor> Condutores { get; set; }
+
 
 
 
@@ -34,6 +37,9 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
             modelBuilder.ApplyConfiguration(new VeiculoConfiguration());
 
             modelBuilder.ApplyConfiguration(new GrupoAutomovelConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CondutorConfiguration());
+
 
 
 
