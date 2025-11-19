@@ -1,0 +1,60 @@
+﻿using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Validators;
+using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Editar;
+
+public class EditarCondutorRequestHandler
+{
+    private readonly ICondutorRepository _repository;
+    private readonly IClienteRepository _clienteRepository;
+    private readonly EditarCondutorValidator _validator;
+
+    public EditarCondutorRequestHandler(
+        ICondutorRepository repository,
+        IClienteRepository clienteRepository)
+    {
+        _repository = repository;
+        _clienteRepository = clienteRepository;
+        _validator = new EditarCondutorValidator();
+    }
+
+    public async Task<object> Handle(EditarCondutorRequest request)
+    {
+        var validation = _validator.Validate(request);
+        if (!validation.IsValid)
+            return validation.Errors.Select(e => e.ErrorMessage);
+
+        var condutor = await _repository.BuscarPorId(request.Id);
+        if (condutor == null)
+            return CondutorErrorResults.CondutorNaoEncontrado;
+
+        var cliente = await _clienteRepository.BuscarPorId(request.ClienteId);
+        if (cliente == null)
+            return CondutorErrorResults.ClienteNaoEncontrado;
+
+        var cpfDuplicado = await _repository.BuscarPorCpf(request.Cpf);
+        if (cpfDuplicado != null && cpfDuplicado.Id != request.Id)
+            return CondutorErrorResults.CpfDuplicado;
+
+        condutor.Editar(
+            request.ClienteId,
+            request.Nome,
+            request.Cpf,
+            request.Cnh,
+            request.ValidadeCnh,
+            request.Telefone,
+            request.Email,
+            request.Endereco,
+            request.CondutorPrincipal
+        );
+
+        await _repository.Atualizar(condutor);
+
+        return new
+        {
+            Mensagem = "Condutor atualizado com sucesso.",
+            Id = condutor.Id
+        };
+    }
+}
