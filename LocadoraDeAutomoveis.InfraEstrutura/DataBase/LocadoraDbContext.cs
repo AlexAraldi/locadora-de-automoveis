@@ -1,6 +1,7 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
+using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 using LocadoraDeAutomoveis.InfraEstrutura.DataBase.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,8 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Funcionario> Funcionarios { get; set; } 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<GrupoAutomovel> GruposAutomovel { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,11 +33,14 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
 
             modelBuilder.ApplyConfiguration(new VeiculoConfiguration());
 
+            modelBuilder.ApplyConfiguration(new GrupoAutomovelConfiguration());
 
-           
+
+
+
         }
 
-       
+
 
     }
 }
