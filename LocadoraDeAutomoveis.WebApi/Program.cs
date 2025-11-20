@@ -51,6 +51,15 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
 
+// Plano de Cobrança
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloPlanoCobranca.Repositories;
+using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Criar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Excluir;
+using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarPorId;
+using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarTodos;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -124,6 +133,17 @@ builder.Services.AddScoped<EditarCondutorRequestHandler>();
 builder.Services.AddScoped<ExcluirCondutorRequestHandler>();
 builder.Services.AddScoped<SelecionarCondutorPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosCondutoresRequestHandler>();
+
+// ============================================================================
+// PLANO DE COBRANÇA
+// ============================================================================
+builder.Services.AddScoped<IPlanoCobrancaRepository, PlanoCobrancaRepository>();
+builder.Services.AddScoped<CriarPlanoCobrancaRequestHandler>();
+builder.Services.AddScoped<EditarPlanoCobrancaRequestHandler>();
+builder.Services.AddScoped<ExcluirPlanoCobrancaRequestHandler>();
+builder.Services.AddScoped<SelecionarPlanoCobrancaPorIdRequestHandler>();
+builder.Services.AddScoped<SelecionarTodosPlanosCobrancaRequestHandler>();
+
 
 
 // ============================================================================
