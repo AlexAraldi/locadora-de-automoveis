@@ -59,6 +59,15 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarTodos;
+using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Criar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Excluir;
+using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarPorId;
+using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarTodos;
+using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloAluguel.Repositories;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -111,7 +120,7 @@ builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddScoped<CriarVeiculoRequestHandler>();
 builder.Services.AddScoped<EditarVeiculoRequestHandler>();
 builder.Services.AddScoped<ExcluirVeiculoRequestHandler>();
-builder.Services.AddScoped<SelecionarVeiculoPorIdHandler>();
+builder.Services.AddScoped<SelecionarVeiculoPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosVeiculosRequestHandler>();
 
 // ============================================================================
@@ -144,7 +153,15 @@ builder.Services.AddScoped<ExcluirPlanoCobrancaRequestHandler>();
 builder.Services.AddScoped<SelecionarPlanoCobrancaPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosPlanosCobrancaRequestHandler>();
 
-
+// ============================================================================
+// ALUGUEL
+// ============================================================================
+builder.Services.AddScoped<IAluguelRepository, AluguelRepository>();
+builder.Services.AddScoped<CriarAluguelRequestHandler>();
+builder.Services.AddScoped<EditarAluguelRequestHandler>();
+builder.Services.AddScoped<ExcluirAluguelRequestHandler>();
+builder.Services.AddScoped<SelecionarAluguelPorIdRequestHandler>();
+builder.Services.AddScoped<SelecionarTodosAlugueisRequestHandler>();
 
 // ============================================================================
 // PIPELINE
