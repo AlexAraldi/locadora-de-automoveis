@@ -13,7 +13,7 @@ public class ExcluirPlanoCobrancaRequestHandler
 
     public async Task<object> Handle(ExcluirPlanoCobrancaRequest request)
     {
-        var plano = await _repository.BuscarPorId(request.Id);
+        var plano = await _repository.SelecionarPorId(request.Id);
 
         if (plano == null)
             return PlanoCobrancaErrorResults.PlanoNaoEncontrado;

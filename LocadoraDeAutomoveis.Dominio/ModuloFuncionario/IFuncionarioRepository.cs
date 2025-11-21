@@ -8,7 +8,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloFuncionario
         Task Atualizar(Funcionario funcionario);
         Task Excluir(Funcionario funcionario);
 
-        Task<Funcionario?> BuscarPorId(Guid id);
+        Task<Funcionario?> SelecionarPorId(Guid id);
         Task<Funcionario?> BuscarPorEmail(string email);
         Task<List<Funcionario>> SelecionarTodos();
     }

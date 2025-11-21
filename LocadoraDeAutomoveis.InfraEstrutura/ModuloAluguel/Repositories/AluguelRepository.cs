@@ -31,7 +31,7 @@ public class AluguelRepository : IAluguelRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Aluguel?> BuscarPorId(Guid id)
+    public async Task<Aluguel?> SelecionarPorId(Guid id)
     {
         return await _context.Alugueis.FirstOrDefaultAsync(x => x.Id == id);
     }

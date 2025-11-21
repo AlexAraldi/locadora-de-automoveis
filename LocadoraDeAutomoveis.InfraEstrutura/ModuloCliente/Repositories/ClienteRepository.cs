@@ -32,7 +32,7 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.ModuloCliente.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Cliente?> BuscarPorId(Guid id)
+        public async Task<Cliente?> SelecionarPorId(Guid id)
         {
             return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
         }

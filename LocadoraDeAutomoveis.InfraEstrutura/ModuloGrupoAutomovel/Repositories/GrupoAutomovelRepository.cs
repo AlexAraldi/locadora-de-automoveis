@@ -31,7 +31,7 @@ public class GrupoAutomovelRepository : IGrupoAutomovelRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<GrupoAutomovel?> BuscarPorId(Guid id)
+    public async Task<GrupoAutomovel?> SelecionarPorId(Guid id)
     {
         return await _context.GruposAutomovel.FirstOrDefaultAsync(x => x.Id == id);
     }

@@ -7,5 +7,4 @@ public interface IVeiculoRepository
     Task Excluir(Veiculo veiculo);
     Task<Veiculo?> SelecionarPorId(Guid id);
     Task<List<Veiculo>> SelecionarTodos();
-    Task<Veiculo?> BuscarPorId(Guid id);
 }

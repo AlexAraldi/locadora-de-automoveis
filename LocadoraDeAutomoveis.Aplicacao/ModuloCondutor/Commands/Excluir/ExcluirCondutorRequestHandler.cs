@@ -13,7 +13,7 @@ public class ExcluirCondutorRequestHandler
 
     public async Task<object> Handle(ExcluirCondutorRequest request)
     {
-        var condutor = await _repository.BuscarPorId(request.Id);
+        var condutor = await _repository.SelecionarPorId(request.Id);
         if (condutor == null)
             return CondutorErrorResults.CondutorNaoEncontrado;
 

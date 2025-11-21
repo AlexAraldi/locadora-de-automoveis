@@ -20,7 +20,7 @@ public class EditarAluguelRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var aluguel = await _repository.BuscarPorId(request.Id);
+        var aluguel = await _repository.SelecionarPorId(request.Id);
         if (aluguel == null)
             return AluguelErrorResults.AluguelNaoEncontrado;
 

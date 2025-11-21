@@ -31,7 +31,7 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.ModuloFuncionario.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Funcionario?> BuscarPorId(Guid id)
+        public async Task<Funcionario?> SelecionarPorId(Guid id)
         {
             return await _context.Funcionarios
                 .FirstOrDefaultAsync(x => x.Id == id);

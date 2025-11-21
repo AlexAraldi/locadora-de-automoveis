@@ -31,7 +31,7 @@ public class PlanoCobrancaRepository : IPlanoCobrancaRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<PlanoCobranca?> BuscarPorId(Guid id)
+    public async Task<PlanoCobranca?> SelecionarPorId(Guid id)
     {
         return await _context.PlanosCobranca.FirstOrDefaultAsync(x => x.Id == id);
     }

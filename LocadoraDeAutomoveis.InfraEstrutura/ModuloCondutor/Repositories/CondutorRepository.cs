@@ -31,7 +31,7 @@ public class CondutorRepository : ICondutorRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Condutor?> BuscarPorId(Guid id)
+    public async Task<Condutor?> SelecionarPorId(Guid id)
     {
         return await _context.Condutores.FirstOrDefaultAsync(x => x.Id == id);
     }

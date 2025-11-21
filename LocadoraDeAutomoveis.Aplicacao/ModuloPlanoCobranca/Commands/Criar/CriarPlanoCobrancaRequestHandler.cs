@@ -26,7 +26,7 @@ public class CriarPlanoCobrancaRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var grupo = await _grupoRepository.BuscarPorId(request.GrupoAutomovelId);
+        var grupo = await _grupoRepository.SelecionarPorId(request.GrupoAutomovelId);
         if (grupo == null)
             return PlanoCobrancaErrorResults.GrupoNaoEncontrado;
 

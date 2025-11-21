@@ -26,11 +26,11 @@ public class EditarPlanoCobrancaRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var plano = await _repository.BuscarPorId(request.Id);
+        var plano = await _repository.SelecionarPorId(request.Id);
         if (plano == null)
             return PlanoCobrancaErrorResults.PlanoNaoEncontrado;
 
-        var grupo = await _grupoRepository.BuscarPorId(request.GrupoAutomovelId);
+        var grupo = await _grupoRepository.SelecionarPorId(request.GrupoAutomovelId);
         if (grupo == null)
             return PlanoCobrancaErrorResults.GrupoNaoEncontrado;
 

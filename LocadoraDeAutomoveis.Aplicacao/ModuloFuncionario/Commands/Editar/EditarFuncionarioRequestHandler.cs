@@ -21,7 +21,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
             if (!validation.IsValid)
                 return validation.Errors.Select(x => x.ErrorMessage);
 
-            var funcionario = await _repository.BuscarPorId(request.Id);
+            var funcionario = await _repository.SelecionarPorId(request.Id);
             if (funcionario == null)
                 return FuncionarioErrorResults.FuncionarioNaoEncontrado;
 

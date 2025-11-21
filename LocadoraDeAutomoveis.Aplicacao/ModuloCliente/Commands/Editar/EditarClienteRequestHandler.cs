@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Editar
 
         public async Task<object> Handle(EditarClienteRequest request, CancellationToken cancellationToken)
         {
-            var cliente = await _repository.BuscarPorId(request.Id);
+            var cliente = await _repository.SelecionarPorId(request.Id);
 
             if (cliente == null)
                 return ClienteErrorResults.ClienteNaoEncontrado;

@@ -20,7 +20,7 @@ public class EditarGrupoAutomovelRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var grupo = await _repository.BuscarPorId(request.Id);
+        var grupo = await _repository.SelecionarPorId(request.Id);
         if (grupo == null)
             return GrupoAutomovelErrorResults.GrupoNaoEncontrado;
 

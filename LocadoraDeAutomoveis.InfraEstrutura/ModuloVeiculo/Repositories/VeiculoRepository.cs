@@ -41,9 +41,5 @@ public class VeiculoRepository : IVeiculoRepository
         return await _context.Veiculos.ToListAsync();
     }
 
-    public async Task<Veiculo?> BuscarPorId(Guid id)
-    {
-        return await _context.Veiculos
-            .FirstOrDefaultAsync(x => x.Id == id);
-    }
+   
 }

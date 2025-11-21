@@ -26,7 +26,7 @@ public class CriarCondutorRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(e => e.ErrorMessage);
 
-        var cliente = await _clienteRepository.BuscarPorId(request.ClienteId);
+        var cliente = await _clienteRepository.SelecionarPorId(request.ClienteId);
         if (cliente == null)
             return CondutorErrorResults.ClienteNaoEncontrado;
 
