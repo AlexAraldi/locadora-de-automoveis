@@ -66,6 +66,11 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAluguel.Repositories;
+using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarPorId;
+using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodos;
+using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloDevolucao.Repositories;
 
 
 
@@ -162,6 +167,15 @@ builder.Services.AddScoped<EditarAluguelRequestHandler>();
 builder.Services.AddScoped<ExcluirAluguelRequestHandler>();
 builder.Services.AddScoped<SelecionarAluguelPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosAlugueisRequestHandler>();
+
+// ============================================================================
+// DEVOLUCAO
+// ============================================================================
+builder.Services.AddScoped<IDevolucaoRepository, DevolucaoRepository>();
+builder.Services.AddScoped<RegistrarDevolucaoRequestHandler>();
+builder.Services.AddScoped<SelecionarDevolucaoPorIdRequestHandler>();
+builder.Services.AddScoped<SelecionarTodasDevolucoesRequestHandler>();
+
 
 // ============================================================================
 // PIPELINE
