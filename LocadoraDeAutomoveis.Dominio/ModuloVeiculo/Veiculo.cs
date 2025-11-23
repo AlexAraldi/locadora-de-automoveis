@@ -11,6 +11,7 @@ public class Veiculo
     public decimal Quilometragem { get; private set; }
     public TipoCombustivel Combustivel { get; private set; }
     public bool Ativo { get; private set; } = true;
+    public int KmInicial { get; set; }
 
     public Veiculo() { }
 
