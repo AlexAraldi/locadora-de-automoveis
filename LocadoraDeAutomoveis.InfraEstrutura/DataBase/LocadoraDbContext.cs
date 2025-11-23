@@ -2,11 +2,13 @@
 using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 using LocadoraDeAutomoveis.InfraEstrutura.DataBase.Configuration;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloDevolucao.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
@@ -26,6 +28,7 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Condutor> Condutores { get; set; }
         public DbSet<PlanoCobranca> PlanosCobranca { get; set; }
         public DbSet<Aluguel> Alugueis { get; set; }
+        public DbSet<Devolucao> Devolucoes { get; set; }
 
 
 
@@ -50,14 +53,8 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
 
             modelBuilder.ApplyConfiguration(new AluguelConfiguration());
 
-
-
-
-
+            modelBuilder.ApplyConfiguration(new DevolucaoConfiguration());
 
         }
-
-
-
     }
 }
