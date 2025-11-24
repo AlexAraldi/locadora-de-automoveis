@@ -32,8 +32,6 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Devolucao> Devolucoes { get; set; }
         public DbSet<TaxaServico> TaxasServico { get; set; }
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             base.OnModelCreating(modelBuilder);
@@ -55,10 +53,6 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
             modelBuilder.ApplyConfiguration(new DevolucaoConfiguration());
 
             modelBuilder.ApplyConfiguration(new TaxaServicoConfiguration());
-
-
-
-
 
         }
     }

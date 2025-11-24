@@ -1,10 +1,11 @@
-﻿using MediatR;
+﻿using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
 {
     public class CriarClienteRequest : IRequest<object>
     {
-        public int Tipo { get; set; } // 1 = PF, 2 = PJ
+        public TipoCliente Tipo { get; set; } 
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }

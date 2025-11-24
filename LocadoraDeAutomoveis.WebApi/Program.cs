@@ -91,13 +91,17 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Validators;
 // JWT
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ============================================================================
 // SERVIÇOS BÁSICOS
 // ============================================================================
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
 builder.Services.AddEndpointsApiExplorer();
 
 // ============================================================================
