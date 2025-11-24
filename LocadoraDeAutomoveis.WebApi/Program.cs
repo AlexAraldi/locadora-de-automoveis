@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using MediatR;
+using System.Reflection;
 
 // Autenticação
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAutenticacao.Repositories;
@@ -59,6 +61,8 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarTodos;
+
+// Aluguel
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Criar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Excluir;
@@ -66,14 +70,23 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAluguel.Repositories;
+
+// Devolução
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloDevolucao.Repositories;
 
-
-
+// Taxa Serviço
+using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
+using LocadoraDeAutomoveis.Infraestrutura.ModuloTaxaServico.Repositories;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.Criar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.Excluir;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.SelecionarPorId;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.SelecionarTodos;
+using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,11 +98,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // ============================================================================
+// MEDIATR (OBRIGATÓRIO)
+// ============================================================================
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(CriarTaxaServicoRequestHandler).Assembly));
+
+// ============================================================================
 // BANCO DE DADOS
 // ============================================================================
 builder.Services.AddDbContext<LocadoraDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+
 
 // ============================================================================
 // AUTENTICAÇÃO
@@ -99,8 +120,6 @@ builder.Services.AddScoped<AutenticarUsuarioRequestHandler>();
 builder.Services.AddScoped<RegistrarUsuarioRequestHandler>();
 builder.Services.AddScoped<RegistrarUsuarioValidator>();
 builder.Services.AddValidatorsFromAssembly(typeof(AutenticarUsuarioRequest).Assembly);
-
-// JWT Service
 builder.Services.AddSingleton(new JwtService(builder.Configuration["Jwt:Key"]));
 
 // ============================================================================
@@ -169,13 +188,25 @@ builder.Services.AddScoped<SelecionarAluguelPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosAlugueisRequestHandler>();
 
 // ============================================================================
-// DEVOLUCAO
+// DEVOLUÇÃO
 // ============================================================================
 builder.Services.AddScoped<IDevolucaoRepository, DevolucaoRepository>();
 builder.Services.AddScoped<RegistrarDevolucaoRequestHandler>();
 builder.Services.AddScoped<SelecionarDevolucaoPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodasDevolucoesRequestHandler>();
 
+// ============================================================================
+// TAXA SERVIÇO
+// ============================================================================
+builder.Services.AddScoped<ITaxaServicoRepository, TaxaServicoRepository>();
+builder.Services.AddScoped<CriarTaxaServicoRequestHandler>();
+builder.Services.AddScoped<EditarTaxaServicoRequestHandler>();
+builder.Services.AddScoped<ExcluirTaxaServicoRequestHandler>();
+builder.Services.AddScoped<SelecionarTaxaServicoPorIdRequestHandler>();
+builder.Services.AddScoped<SelecionarTodasTaxasServicoRequestHandler>();
+
+builder.Services.AddScoped<CriarTaxaServicoValidator>();
+builder.Services.AddScoped<EditarTaxaServicoValidator>();
 
 // ============================================================================
 // PIPELINE
