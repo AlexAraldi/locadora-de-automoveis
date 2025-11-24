@@ -15,7 +15,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Editar
 
         public async Task<object> Handle(EditarClienteRequest request, CancellationToken cancellationToken)
         {
-            var cliente = await _repository.SelecionarPorId(request.Id);
+            var cliente = await _repository.SelecionarPorIdAsync(request.Id);
 
             if (cliente == null)
                 return ClienteErrorResults.ClienteNaoEncontrado;
@@ -35,7 +35,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Editar
 
             cliente.Endereco = request.Endereco;
 
-            await _repository.Atualizar(cliente);
+            await _repository.AtualizarAsync(cliente);
 
             return new { Mensagem = "Cliente atualizado com sucesso." };
         }

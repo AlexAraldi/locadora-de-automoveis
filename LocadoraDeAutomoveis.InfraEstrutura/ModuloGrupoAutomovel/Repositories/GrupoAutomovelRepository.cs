@@ -13,35 +13,35 @@ public class GrupoAutomovelRepository : IGrupoAutomovelRepository
         _context = context;
     }
 
-    public async Task Adicionar(GrupoAutomovel grupo)
+    public async Task AdicionarAsync(GrupoAutomovel grupo)
     {
         await _context.GruposAutomovel.AddAsync(grupo);
         await _context.SaveChangesAsync();
     }
 
-    public async Task Editar(GrupoAutomovel grupo)
+    public async Task EditarAsync(GrupoAutomovel grupo)
     {
         _context.GruposAutomovel.Update(grupo);
         await _context.SaveChangesAsync();
     }
 
-    public async Task Excluir(GrupoAutomovel grupo)
+    public async Task ExcluirAsync(GrupoAutomovel grupo)
     {
         _context.GruposAutomovel.Remove(grupo);
         await _context.SaveChangesAsync();
     }
 
-    public async Task<GrupoAutomovel?> SelecionarPorId(Guid id)
+    public async Task<GrupoAutomovel?> SelecionarPorIdAsync(Guid id)
     {
         return await _context.GruposAutomovel.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<GrupoAutomovel?> BuscarPorNome(string nome)
+    public async Task<GrupoAutomovel?> BuscarPorNomeAsync(string nome)
     {
         return await _context.GruposAutomovel.FirstOrDefaultAsync(x => x.Nome == nome);
     }
 
-    public async Task<List<GrupoAutomovel>> SelecionarTodos()
+    public async Task<List<GrupoAutomovel>> SelecionarTodosAsync()
     {
         return await _context.GruposAutomovel.ToListAsync();
     }

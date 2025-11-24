@@ -20,13 +20,13 @@ public class EditarVeiculoRequestHandler : IRequestHandler<EditarVeiculoRequest,
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var veiculo = await _repository.SelecionarPorId(request.Id);
+        var veiculo = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (veiculo == null)
             return VeiculoErrorResults.VeiculoNaoEncontrado;
 
         // Verifica placa duplicada
-        var todos = await _repository.SelecionarTodos();
+        var todos = await _repository.SelecionarTodosAsync();
         if (todos.Any(x => x.Placa == request.Placa && x.Id != request.Id))
             return VeiculoErrorResults.PlacaJaRegistrada;
 
@@ -39,7 +39,7 @@ public class EditarVeiculoRequestHandler : IRequestHandler<EditarVeiculoRequest,
             (TipoCombustivel)request.Combustivel
         );
 
-        await _repository.Editar(veiculo);
+        await _repository.EditarAsync(veiculo);
 
         return new { Mensagem = "Veículo atualizado com sucesso." };
     }

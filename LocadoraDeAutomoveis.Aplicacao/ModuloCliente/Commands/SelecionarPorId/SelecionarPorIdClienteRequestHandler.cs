@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.SelecionarPorId
 
         public async Task<object> Handle(SelecionarClientePorIdRequest request)
         {
-            var cliente = await _repository.SelecionarPorId(request.Id);
+            var cliente = await _repository.SelecionarPorIdAsync(request.Id);
 
             if (cliente == null)
                 return ClienteErrorResults.ClienteNaoEncontrado;

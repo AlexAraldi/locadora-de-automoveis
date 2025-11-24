@@ -26,15 +26,15 @@ public class EditarPlanoCobrancaRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var plano = await _repository.SelecionarPorId(request.Id);
+        var plano = await _repository.SelecionarPorIdAsync(request.Id);
         if (plano == null)
             return PlanoCobrancaErrorResults.PlanoNaoEncontrado;
 
-        var grupo = await _grupoRepository.SelecionarPorId(request.GrupoAutomovelId);
+        var grupo = await _grupoRepository.SelecionarPorIdAsync(request.GrupoAutomovelId);
         if (grupo == null)
             return PlanoCobrancaErrorResults.GrupoNaoEncontrado;
 
-        var duplicado = await _repository.BuscarDuplicado(request.GrupoAutomovelId, request.TipoPlano);
+        var duplicado = await _repository.BuscarDuplicadoAsync(request.GrupoAutomovelId, request.TipoPlano);
         if (duplicado != null && duplicado.Id != request.Id)
             return PlanoCobrancaErrorResults.PlanoDuplicado;
 
@@ -48,7 +48,7 @@ public class EditarPlanoCobrancaRequestHandler
             request.ValorExcedenteKm
         );
 
-        await _repository.Atualizar(plano);
+        await _repository.AtualizarAsync(plano);
 
         return new { Mensagem = "Plano atualizado com sucesso." };
     }

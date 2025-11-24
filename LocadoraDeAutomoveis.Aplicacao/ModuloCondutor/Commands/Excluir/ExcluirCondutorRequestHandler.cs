@@ -13,11 +13,11 @@ public class ExcluirCondutorRequestHandler
 
     public async Task<object> Handle(ExcluirCondutorRequest request)
     {
-        var condutor = await _repository.SelecionarPorId(request.Id);
+        var condutor = await _repository.SelecionarPorIdAsync(request.Id);
         if (condutor == null)
             return CondutorErrorResults.CondutorNaoEncontrado;
 
-        await _repository.Excluir(condutor);
+        await _repository.ExcluirAsync(condutor);
 
         return new { Mensagem = "Condutor excluído com sucesso." };
     }

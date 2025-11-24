@@ -14,7 +14,7 @@ public class SelecionarCondutorPorIdRequestHandler
 
     public async Task<object> Handle(SelecionarCondutorPorIdRequest request)
     {
-        var condutor = await _repository.SelecionarPorId(request.Id);
+        var condutor = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (condutor == null)
             return CondutorErrorResults.CondutorNaoEncontrado;

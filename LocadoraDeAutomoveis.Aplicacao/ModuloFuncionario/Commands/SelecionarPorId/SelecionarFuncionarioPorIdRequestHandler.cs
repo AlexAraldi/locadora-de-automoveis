@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPo
 
         public async Task<object> Handle(SelecionarFuncionarioPorIdRequest request)
         {
-            var funcionario = await _repository.SelecionarPorId(request.Id);
+            var funcionario = await _repository.SelecionarPorIdAsync(request.Id);
 
             if (funcionario == null)
                 return FuncionarioErrorResults.FuncionarioNaoEncontrado;

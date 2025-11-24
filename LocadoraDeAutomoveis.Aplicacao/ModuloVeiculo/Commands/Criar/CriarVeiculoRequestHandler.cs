@@ -22,7 +22,7 @@ public class CriarVeiculoRequestHandler : IRequestHandler<CriarVeiculoRequest, o
             return validation.Errors.Select(e => e.ErrorMessage);
 
         // Verifica placa duplicada
-        var existentes = await _repository.SelecionarTodos();
+        var existentes = await _repository.SelecionarTodosAsync();
         if (existentes.Any(x => x.Placa == request.Placa))
             return VeiculoErrorResults.PlacaJaRegistrada;
 
@@ -35,7 +35,7 @@ public class CriarVeiculoRequestHandler : IRequestHandler<CriarVeiculoRequest, o
             (TipoCombustivel)request.Combustivel
         );
 
-        await _repository.Adicionar(v);
+        await _repository.AdicionarAsync(v);
 
         return new
         {

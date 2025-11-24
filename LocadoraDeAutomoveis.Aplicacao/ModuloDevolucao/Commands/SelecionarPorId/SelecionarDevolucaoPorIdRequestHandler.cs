@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarPorI
 
         public async Task<object> Handle(SelecionarDevolucaoPorIdRequest request)
         {
-            var d = await _repository.SelecionarPorId(request.Id);
+            var d = await _repository.SelecionarPorIdAsync(request.Id);
 
             if (d == null)
                 return "Devolução não encontrada.";

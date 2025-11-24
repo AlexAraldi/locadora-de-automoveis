@@ -21,7 +21,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
             if (!validation.IsValid)
                 return validation.Errors.Select(x => x.ErrorMessage);
 
-            var existente = await _repository.BuscarPorEmail(request.Email);
+            var existente = await _repository.BuscarPorEmailAsync(request.Email);
             if (existente != null)
                 return FuncionarioErrorResults.EmailJaCadastrado;
 
@@ -35,7 +35,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
                 Salario = request.Salario
             };
 
-            await _repository.Adicionar(funcionario);
+            await _repository.AdicionarAsync(funcionario);
 
             return new FuncionarioDto
             {

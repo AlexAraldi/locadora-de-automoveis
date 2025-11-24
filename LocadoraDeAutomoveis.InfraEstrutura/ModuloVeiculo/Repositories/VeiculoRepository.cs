@@ -13,30 +13,30 @@ public class VeiculoRepository : IVeiculoRepository
         _context = context;
     }
 
-    public async Task Adicionar(Veiculo veiculo)
+    public async Task AdicionarAsync(Veiculo veiculo)
     {
         await _context.Veiculos.AddAsync(veiculo);
         await _context.SaveChangesAsync();
     }
 
-    public async Task Editar(Veiculo veiculo)
+    public async Task EditarAsync(Veiculo veiculo)
     {
         _context.Veiculos.Update(veiculo);
         await _context.SaveChangesAsync();
     }
 
-    public async Task Excluir(Veiculo veiculo)
+    public async Task ExcluirAsync(Veiculo veiculo)
     {
         _context.Veiculos.Remove(veiculo);
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Veiculo?> SelecionarPorId(Guid id)
+    public async Task<Veiculo?> SelecionarPorIdAsync(Guid id)
     {
         return await _context.Veiculos.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<Veiculo>> SelecionarTodos()
+    public async Task<List<Veiculo>> SelecionarTodosAsync()
     {
         return await _context.Veiculos.ToListAsync();
     }

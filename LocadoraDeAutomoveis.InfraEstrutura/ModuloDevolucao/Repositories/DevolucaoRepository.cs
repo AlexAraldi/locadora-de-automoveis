@@ -13,18 +13,18 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.ModuloDevolucao.Repositories
             _context = context;
         }
 
-        public async Task Adicionar(Devolucao devolucao)
+        public async Task AdicionarAsync(Devolucao devolucao)
         {
             _context.Devolucoes.Add(devolucao);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Devolucao?> SelecionarPorId(Guid id)
+        public async Task<Devolucao?> SelecionarPorIdAsync(Guid id)
         {
             return await _context.Devolucoes.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<Devolucao>> SelecionarTodos()
+        public async Task<List<Devolucao>> SelecionarTodosAsync()
         {
             return await _context.Devolucoes.ToListAsync();
         }

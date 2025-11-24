@@ -17,14 +17,14 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
             // Valida duplicidade
             if (!string.IsNullOrWhiteSpace(request.Cpf))
             {
-                var existe = await _repository.BuscarPorCpf(request.Cpf);
+                var existe = await _repository.BuscarPorCpfAsync(request.Cpf);
                 if (existe != null)
                     return ClienteErrorResults.CpfJaRegistrado;
             }
 
             if (!string.IsNullOrWhiteSpace(request.Cnpj))
             {
-                var existe = await _repository.BuscarPorCnpj(request.Cnpj);
+                var existe = await _repository.BuscarPorCnpjAsync(request.Cnpj);
                 if (existe != null)
                     return ClienteErrorResults.CnpjJaRegistrado;
             }
@@ -45,7 +45,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
                 Endereco = request.Endereco
             };
 
-            await _repository.Adicionar(cliente);
+            await _repository.AdicionarAsync(cliente);
 
             return new
             {

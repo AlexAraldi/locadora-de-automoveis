@@ -14,7 +14,7 @@ public class SelecionarTodosCondutoresRequestHandler
 
     public async Task<IEnumerable<CondutorDto>> Handle(SelecionarTodosCondutoresRequest request)
     {
-        var lista = await _repository.SelecionarTodos();
+        var lista = await _repository.SelecionarTodosAsync();
 
         return lista.Select(c => new CondutorDto
         {

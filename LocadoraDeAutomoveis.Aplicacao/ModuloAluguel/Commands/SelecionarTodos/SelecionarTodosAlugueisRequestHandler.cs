@@ -14,7 +14,7 @@ public class SelecionarTodosAlugueisRequestHandler
 
     public async Task<IEnumerable<AluguelDto>> Handle(SelecionarTodosAlugueisRequest request)
     {
-        var alugueis = await _repository.SelecionarTodos();
+        var alugueis = await _repository.SelecionarTodosAsync();
 
         return alugueis.Select(a => new AluguelDto
         {

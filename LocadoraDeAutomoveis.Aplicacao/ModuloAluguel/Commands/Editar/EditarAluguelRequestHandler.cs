@@ -20,7 +20,7 @@ public class EditarAluguelRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var aluguel = await _repository.SelecionarPorId(request.Id);
+        var aluguel = await _repository.SelecionarPorIdAsync(request.Id);
         if (aluguel == null)
             return AluguelErrorResults.AluguelNaoEncontrado;
 
@@ -35,7 +35,7 @@ public class EditarAluguelRequestHandler
             aluguel.ValorPrevisto
         );
 
-        await _repository.Atualizar(aluguel);
+        await _repository.AtualizarAsync(aluguel);
 
         return new { Mensagem = "Aluguel atualizado com sucesso." };
     }

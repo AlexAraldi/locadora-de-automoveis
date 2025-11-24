@@ -14,7 +14,7 @@ public class SelecionarTodosPlanosCobrancaRequestHandler
 
     public async Task<IEnumerable<PlanoCobrancaDto>> Handle(SelecionarTodosPlanosCobrancaRequest request)
     {
-        var planos = await _repository.SelecionarTodos();
+        var planos = await _repository.SelecionarTodosAsync();
 
         return planos.Select(plano => new PlanoCobrancaDto
         {

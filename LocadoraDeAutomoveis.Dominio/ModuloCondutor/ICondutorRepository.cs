@@ -2,11 +2,11 @@
 
 public interface ICondutorRepository
 {
-    Task Adicionar(Condutor condutor);
-    Task Atualizar(Condutor condutor);
-    Task Excluir(Condutor condutor);
-    Task<Condutor?> SelecionarPorId(Guid id);
-    Task<List<Condutor>> SelecionarTodos();
-    Task<Condutor?> BuscarPorCpf(string cpf);
-    Task<List<Condutor>> SelecionarPorCliente(Guid clienteId);
+    Task AdicionarAsync(Condutor condutor);
+    Task AtualizarAsync(Condutor condutor);
+    Task ExcluirAsync(Condutor condutor);
+    Task<Condutor?> SelecionarPorIdAsync(Guid id);
+    Task<List<Condutor>> SelecionarTodosAsync();
+    Task<Condutor?> BuscarPorCpfAsync(string cpf);
+    Task<List<Condutor>> SelecionarPorClienteAsync(Guid clienteId);
 }

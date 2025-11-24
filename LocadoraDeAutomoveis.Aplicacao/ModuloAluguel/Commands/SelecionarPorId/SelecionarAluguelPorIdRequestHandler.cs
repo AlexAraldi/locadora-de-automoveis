@@ -14,7 +14,7 @@ public class SelecionarAluguelPorIdRequestHandler
 
     public async Task<object> Handle(SelecionarAluguelPorIdRequest request)
     {
-        var aluguel = await _repository.SelecionarPorId(request.Id);
+        var aluguel = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (aluguel == null)
             return AluguelErrorResults.AluguelNaoEncontrado;

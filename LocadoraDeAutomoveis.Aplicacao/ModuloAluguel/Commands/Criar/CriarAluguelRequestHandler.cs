@@ -43,23 +43,23 @@ public class CriarAluguelRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        if (await _clienteRepository.SelecionarPorId(request.ClienteId) is null)
+        if (await _clienteRepository.SelecionarPorIdAsync(request.ClienteId) is null)
             return AluguelErrorResults.ClienteNaoEncontrado;
 
-        if (await _condutorRepository.SelecionarPorId(request.CondutorId) is null)
+        if (await _condutorRepository.SelecionarPorIdAsync(request.CondutorId) is null)
             return AluguelErrorResults.CondutorNaoEncontrado;
 
-        if (await _grupoRepository.SelecionarPorId(request.GrupoAutomovelId) is null)
+        if (await _grupoRepository.SelecionarPorIdAsync(request.GrupoAutomovelId) is null)
             return AluguelErrorResults.GrupoNaoEncontrado;
 
-        var veiculo = await _veiculoRepository.SelecionarPorId(request.VeiculoId);
+        var veiculo = await _veiculoRepository.SelecionarPorIdAsync(request.VeiculoId);
         if (veiculo is null)
             return AluguelErrorResults.VeiculoNaoEncontrado;
 
-        if (await _repository.VeiculoEstaAlugado(request.VeiculoId))
+        if (await _repository.VeiculoEstaAlugadoAsync(request.VeiculoId))
             return AluguelErrorResults.VeiculoIndisponivel;
 
-        var plano = await _planoRepository.SelecionarPorId(request.PlanoCobrancaId);
+        var plano = await _planoRepository.SelecionarPorIdAsync(request.PlanoCobrancaId);
         if (plano is null)
             return AluguelErrorResults.PlanoNaoEncontrado;
 
@@ -84,7 +84,7 @@ public class CriarAluguelRequestHandler
             request.DataPrevistaTermino,
             valorPrevisto);
 
-        await _repository.Adicionar(aluguel);
+        await _repository.AdicionarAsync(aluguel);
 
         return new
         {

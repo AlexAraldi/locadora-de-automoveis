@@ -2,9 +2,9 @@
 
 public interface IVeiculoRepository
 {
-    Task Adicionar(Veiculo veiculo);
-    Task Editar(Veiculo veiculo);
-    Task Excluir(Veiculo veiculo);
-    Task<Veiculo?> SelecionarPorId(Guid id);
-    Task<List<Veiculo>> SelecionarTodos();
+    Task AdicionarAsync(Veiculo veiculo);
+    Task EditarAsync(Veiculo veiculo);
+    Task ExcluirAsync(Veiculo veiculo);
+    Task<Veiculo?> SelecionarPorIdAsync(Guid id);
+    Task<List<Veiculo>> SelecionarTodosAsync();
 }

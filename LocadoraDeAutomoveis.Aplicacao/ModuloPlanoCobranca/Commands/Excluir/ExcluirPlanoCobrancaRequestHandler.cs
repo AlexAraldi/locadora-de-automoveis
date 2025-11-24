@@ -13,12 +13,12 @@ public class ExcluirPlanoCobrancaRequestHandler
 
     public async Task<object> Handle(ExcluirPlanoCobrancaRequest request)
     {
-        var plano = await _repository.SelecionarPorId(request.Id);
+        var plano = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (plano == null)
             return PlanoCobrancaErrorResults.PlanoNaoEncontrado;
 
-        await _repository.Excluir(plano);
+        await _repository.ExcluirAsync(plano);
 
         return new { Mensagem = "Plano excluído com sucesso." };
     }

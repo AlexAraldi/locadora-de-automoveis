@@ -21,11 +21,11 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
             if (!validation.IsValid)
                 return validation.Errors.Select(x => x.ErrorMessage);
 
-            var funcionario = await _repository.SelecionarPorId(request.Id);
+            var funcionario = await _repository.SelecionarPorIdAsync(request.Id);
             if (funcionario == null)
                 return FuncionarioErrorResults.FuncionarioNaoEncontrado;
 
-            var emailDuplicado = await _repository.BuscarPorEmail(request.Email);
+            var emailDuplicado = await _repository.BuscarPorEmailAsync(request.Email);
             if (emailDuplicado != null && emailDuplicado.Id != request.Id)
                 return FuncionarioErrorResults.EmailJaCadastrado;
 
@@ -35,7 +35,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
             funcionario.DataAdmissao = request.DataAdmissao;
             funcionario.Salario = request.Salario;
 
-            await _repository.Atualizar(funcionario);
+            await _repository.AtualizarAsync(funcionario);
 
             return new FuncionarioDto
             {

@@ -20,17 +20,17 @@ public class EditarGrupoAutomovelRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
-        var grupo = await _repository.SelecionarPorId(request.Id);
+        var grupo = await _repository.SelecionarPorIdAsync(request.Id);
         if (grupo == null)
             return GrupoAutomovelErrorResults.GrupoNaoEncontrado;
 
-        var duplicado = await _repository.BuscarPorNome(request.Nome);
+        var duplicado = await _repository.BuscarPorNomeAsync(request.Nome);
         if (duplicado != null && duplicado.Id != request.Id)
             return GrupoAutomovelErrorResults.NomeDuplicado;
 
         grupo.Editar(request.Nome);
 
-        await _repository.Editar(grupo);
+        await _repository.EditarAsync(grupo);
 
         return new
         {

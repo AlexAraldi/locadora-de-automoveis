@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarTo
 
         public async Task<IEnumerable<FuncionarioDto>> Handle()
         {
-            var funcionarios = await _repository.SelecionarTodos();
+            var funcionarios = await _repository.SelecionarTodosAsync();
 
             return funcionarios.Select(f => new FuncionarioDto
             {

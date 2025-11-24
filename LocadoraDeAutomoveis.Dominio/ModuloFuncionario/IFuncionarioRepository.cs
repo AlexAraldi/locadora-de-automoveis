@@ -4,12 +4,12 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloFuncionario
 {
     public interface IFuncionarioRepository
     {
-        Task Adicionar(Funcionario funcionario);
-        Task Atualizar(Funcionario funcionario);
-        Task Excluir(Funcionario funcionario);
+        Task AdicionarAsync(Funcionario funcionario);
+        Task AtualizarAsync(Funcionario funcionario);
+        Task ExcluirAsync(Funcionario funcionario);
 
-        Task<Funcionario?> SelecionarPorId(Guid id);
-        Task<Funcionario?> BuscarPorEmail(string email);
-        Task<List<Funcionario>> SelecionarTodos();
+        Task<Funcionario?> SelecionarPorIdAsync(Guid id);
+        Task<Funcionario?> BuscarPorEmailAsync(string email);
+        Task<List<Funcionario>> SelecionarTodosAsync();
     }
 }

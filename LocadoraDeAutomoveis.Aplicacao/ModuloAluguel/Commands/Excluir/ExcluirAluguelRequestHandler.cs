@@ -13,12 +13,12 @@ public class ExcluirAluguelRequestHandler
 
     public async Task<object> Handle(ExcluirAluguelRequest request)
     {
-        var aluguel = await _repository.SelecionarPorId(request.Id);
+        var aluguel = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (aluguel == null)
             return AluguelErrorResults.AluguelNaoEncontrado;
 
-        await _repository.Excluir(aluguel);
+        await _repository.ExcluirAsync(aluguel);
 
         return new { Mensagem = "Aluguel excluído com sucesso." };
     }

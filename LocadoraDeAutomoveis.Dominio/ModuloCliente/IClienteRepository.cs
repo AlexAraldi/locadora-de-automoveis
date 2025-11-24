@@ -2,13 +2,13 @@
 {
     public interface IClienteRepository
     {
-        Task Adicionar(Cliente cliente);
-        Task Atualizar(Cliente cliente);
-        Task Excluir(Cliente cliente);
+        Task AdicionarAsync(Cliente cliente);
+        Task AtualizarAsync(Cliente cliente);
+        Task ExcluirAsync(Cliente cliente);
 
-        Task<Cliente?> SelecionarPorId(Guid id);
-        Task<Cliente?> BuscarPorCpf(string cpf);
-        Task<Cliente?> BuscarPorCnpj(string cnpj);
-        Task<List<Cliente>> SelecionarTodos();
+        Task<Cliente?> SelecionarPorIdAsync(Guid id);
+        Task<Cliente?> BuscarPorCpfAsync(string cpf);
+        Task<Cliente?> BuscarPorCnpjAsync(string cnpj);
+        Task<List<Cliente>> SelecionarTodosAsync();
     }
 }

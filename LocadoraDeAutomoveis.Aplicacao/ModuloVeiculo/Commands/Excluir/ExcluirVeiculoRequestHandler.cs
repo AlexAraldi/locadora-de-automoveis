@@ -14,12 +14,12 @@ public class ExcluirVeiculoRequestHandler : IRequestHandler<ExcluirVeiculoReques
 
     public async Task<object> Handle(ExcluirVeiculoRequest request, CancellationToken cancellationToken)
     {
-        var veiculo = await _repository.SelecionarPorId(request.Id);
+        var veiculo = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (veiculo == null)
             return VeiculoErrorResults.VeiculoNaoEncontrado;
 
-        await _repository.Excluir(veiculo);
+        await _repository.ExcluirAsync(veiculo);
 
         return new { Mensagem = "Veículo excluído com sucesso." };
     }

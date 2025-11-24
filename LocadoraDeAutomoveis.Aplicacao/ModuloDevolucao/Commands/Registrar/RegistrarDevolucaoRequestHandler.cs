@@ -33,11 +33,11 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar
             if (!validation.IsValid)
                 return validation.Errors.Select(x => x.ErrorMessage);
 
-            var aluguel = await _aluguelRepository.SelecionarPorId(request.AluguelId);
+            var aluguel = await _aluguelRepository.SelecionarPorIdAsync(request.AluguelId);
             if (aluguel == null)
                 return DevolucaoErrorResults.AluguelNaoEncontrado;
 
-            var veiculo = await _veiculoRepository.SelecionarPorId(aluguel.VeiculoId);
+            var veiculo = await _veiculoRepository.SelecionarPorIdAsync(aluguel.VeiculoId);
             if (veiculo == null)
                 return "Veículo não encontrado.";
 
@@ -59,8 +59,8 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar
 
             aluguel.FecharAluguel(request.DataDevolucao, request.KmFinal, request.ValorMultas, valorFinal);
 
-            await _aluguelRepository.Atualizar(aluguel);
-            await _devolucaoRepository.Adicionar(devolucao);
+            await _aluguelRepository.AtualizarAsync(aluguel);
+            await _devolucaoRepository.AdicionarAsync(devolucao);
 
             return new { Mensagem = "Devolução registrada com sucesso.", ValorFinal = valorFinal };
         }

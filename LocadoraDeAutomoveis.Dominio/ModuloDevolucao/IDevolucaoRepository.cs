@@ -6,8 +6,8 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloDevolucao
 {
     public interface IDevolucaoRepository
     {
-        Task Adicionar(Devolucao devolucao);
-        Task<Devolucao?> SelecionarPorId(Guid id);
-        Task<List<Devolucao>> SelecionarTodos();
+        Task AdicionarAsync(Devolucao devolucao);
+        Task<Devolucao?> SelecionarPorIdAsync(Guid id);
+        Task<List<Devolucao>> SelecionarTodosAsync();
     }
 }

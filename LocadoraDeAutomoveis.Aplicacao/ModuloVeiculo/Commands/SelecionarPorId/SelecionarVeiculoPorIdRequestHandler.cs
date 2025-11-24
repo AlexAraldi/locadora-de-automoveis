@@ -14,7 +14,7 @@ public class SelecionarVeiculoPorIdRequestHandler
 
     public async Task<object> Handle(SelecionarVeiculoPorIdRequest request)
     {
-        var v = await _repository.SelecionarPorId(request.Id);
+        var v = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (v == null)
             return VeiculoErrorResults.VeiculoNaoEncontrado;

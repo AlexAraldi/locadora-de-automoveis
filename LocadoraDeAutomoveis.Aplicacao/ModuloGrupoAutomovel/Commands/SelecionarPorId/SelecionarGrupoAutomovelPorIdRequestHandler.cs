@@ -14,7 +14,7 @@ public class SelecionarGrupoAutomovelPorIdRequestHandler
 
     public async Task<object> Handle(SelecionarGrupoAutomovelPorIdRequest request)
     {
-        var grupo = await _repository.SelecionarPorId(request.Id);
+        var grupo = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (grupo == null)
             return GrupoAutomovelErrorResults.GrupoNaoEncontrado;

@@ -20,13 +20,13 @@ public class CriarGrupoAutomovelRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(e => e.ErrorMessage);
 
-        var existente = await _repository.BuscarPorNome(request.Nome);
+        var existente = await _repository.BuscarPorNomeAsync(request.Nome);
         if (existente != null)
             return GrupoAutomovelErrorResults.NomeDuplicado;
 
         var grupo = new GrupoAutomovel(request.Nome);
 
-        await _repository.Adicionar(grupo);
+        await _repository.AdicionarAsync(grupo);
 
         return new
         {

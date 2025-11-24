@@ -13,11 +13,11 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Excluir
 
         public async Task<object> Handle(ExcluirFuncionarioRequest request)
         {
-            var funcionario = await _repository.SelecionarPorId(request.Id);
+            var funcionario = await _repository.SelecionarPorIdAsync(request.Id);
             if (funcionario == null)
                 return FuncionarioErrorResults.FuncionarioNaoEncontrado;
 
-            await _repository.Excluir(funcionario);
+            await _repository.ExcluirAsync(funcionario);
 
             return new
             {

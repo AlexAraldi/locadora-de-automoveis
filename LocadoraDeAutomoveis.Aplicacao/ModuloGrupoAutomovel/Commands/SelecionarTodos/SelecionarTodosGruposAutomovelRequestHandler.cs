@@ -14,7 +14,7 @@ public class SelecionarTodosGruposAutomovelRequestHandler
 
     public async Task<IEnumerable<GrupoAutomovelDto>> Handle(SelecionarTodosGruposAutomovelRequest request)
     {
-        var lista = await _repository.SelecionarTodos();
+        var lista = await _repository.SelecionarTodosAsync();
 
         return lista.Select(g => new GrupoAutomovelDto
         {

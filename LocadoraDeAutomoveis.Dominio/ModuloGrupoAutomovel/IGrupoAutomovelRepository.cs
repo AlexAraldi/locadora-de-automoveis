@@ -2,10 +2,10 @@
 
 public interface IGrupoAutomovelRepository
 {
-    Task Adicionar(GrupoAutomovel grupo);
-    Task Editar(GrupoAutomovel grupo);
-    Task Excluir(GrupoAutomovel grupo);
-    Task<GrupoAutomovel?> SelecionarPorId(Guid id);
-    Task<GrupoAutomovel?> BuscarPorNome(string nome);
-    Task<List<GrupoAutomovel>> SelecionarTodos();
+    Task AdicionarAsync(GrupoAutomovel grupo);
+    Task EditarAsync(GrupoAutomovel grupo);
+    Task ExcluirAsync(GrupoAutomovel grupo);
+    Task<GrupoAutomovel?> SelecionarPorIdAsync(Guid id);
+    Task<GrupoAutomovel?> BuscarPorNomeAsync(string nome);
+    Task<List<GrupoAutomovel>> SelecionarTodosAsync();
 }

@@ -26,11 +26,11 @@ public class CriarCondutorRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(e => e.ErrorMessage);
 
-        var cliente = await _clienteRepository.SelecionarPorId(request.ClienteId);
+        var cliente = await _clienteRepository.SelecionarPorIdAsync(request.ClienteId);
         if (cliente == null)
             return CondutorErrorResults.ClienteNaoEncontrado;
 
-        var duplicado = await _repository.BuscarPorCpf(request.Cpf);
+        var duplicado = await _repository.BuscarPorCpfAsync(request.Cpf);
         if (duplicado != null)
             return CondutorErrorResults.CpfDuplicado;
 
@@ -46,7 +46,7 @@ public class CriarCondutorRequestHandler
             request.CondutorPrincipal
         );
 
-        await _repository.Adicionar(condutor);
+        await _repository.AdicionarAsync(condutor);
 
         return new
         {

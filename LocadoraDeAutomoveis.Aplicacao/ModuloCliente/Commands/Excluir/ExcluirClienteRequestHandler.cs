@@ -14,12 +14,12 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Excluir
 
         public async Task<object> Handle(ExcluirClienteRequest request, CancellationToken cancellationToken)
         {
-            var cliente = await _repository.SelecionarPorId(request.Id);
+            var cliente = await _repository.SelecionarPorIdAsync(request.Id);
 
             if (cliente == null)
                 return ClienteErrorResults.ClienteNaoEncontrado;
 
-            await _repository.Excluir(cliente);
+            await _repository.ExcluirAsync(cliente);
 
             return new { Mensagem = "Cliente excluído com sucesso." };
         }

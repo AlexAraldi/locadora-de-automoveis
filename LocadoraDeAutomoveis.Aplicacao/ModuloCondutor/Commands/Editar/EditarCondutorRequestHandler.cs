@@ -25,15 +25,15 @@ public class EditarCondutorRequestHandler
         if (!validation.IsValid)
             return validation.Errors.Select(e => e.ErrorMessage);
 
-        var condutor = await _repository.SelecionarPorId(request.Id);
+        var condutor = await _repository.SelecionarPorIdAsync(request.Id);
         if (condutor == null)
             return CondutorErrorResults.CondutorNaoEncontrado;
 
-        var cliente = await _clienteRepository.SelecionarPorId(request.ClienteId);
+        var cliente = await _clienteRepository.SelecionarPorIdAsync(request.ClienteId);
         if (cliente == null)
             return CondutorErrorResults.ClienteNaoEncontrado;
 
-        var cpfDuplicado = await _repository.BuscarPorCpf(request.Cpf);
+        var cpfDuplicado = await _repository.BuscarPorCpfAsync(request.Cpf);
         if (cpfDuplicado != null && cpfDuplicado.Id != request.Id)
             return CondutorErrorResults.CpfDuplicado;
 
@@ -49,7 +49,7 @@ public class EditarCondutorRequestHandler
             request.CondutorPrincipal
         );
 
-        await _repository.Atualizar(condutor);
+        await _repository.AtualizarAsync(condutor);
 
         return new
         {

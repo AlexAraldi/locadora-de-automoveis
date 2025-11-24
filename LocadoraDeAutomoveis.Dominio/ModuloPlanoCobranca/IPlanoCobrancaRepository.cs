@@ -2,11 +2,11 @@
 
 public interface IPlanoCobrancaRepository
 {
-    Task Adicionar(PlanoCobranca plano);
-    Task Atualizar(PlanoCobranca plano);
-    Task Excluir(PlanoCobranca plano);
-    Task<PlanoCobranca?> SelecionarPorId(Guid id);
-    Task<List<PlanoCobranca>> SelecionarTodos();
-    Task<List<PlanoCobranca>> SelecionarPorGrupo(Guid grupoAutomovelId);
-    Task<PlanoCobranca?> BuscarDuplicado(Guid grupoId, TipoPlano tipoPlano);
+    Task AdicionarAsync(PlanoCobranca plano);
+    Task AtualizarAsync(PlanoCobranca plano);
+    Task ExcluirAsync(PlanoCobranca plano);
+    Task<PlanoCobranca?> SelecionarPorIdAsync(Guid id);
+    Task<List<PlanoCobranca>> SelecionarTodosAsync();
+    Task<List<PlanoCobranca>> SelecionarPorGrupoAsync(Guid grupoAutomovelId);
+    Task<PlanoCobranca?> BuscarDuplicadoAsync(Guid grupoId, TipoPlano tipoPlano);
 }

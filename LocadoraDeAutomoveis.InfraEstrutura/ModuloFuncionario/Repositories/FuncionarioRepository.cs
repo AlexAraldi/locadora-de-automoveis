@@ -13,37 +13,37 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.ModuloFuncionario.Repositories
             _context = context;
         }
 
-        public async Task Adicionar(Funcionario funcionario)
+        public async Task AdicionarAsync(Funcionario funcionario)
         {
             await _context.Funcionarios.AddAsync(funcionario);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Atualizar(Funcionario funcionario)
+        public async Task AtualizarAsync(Funcionario funcionario)
         {
             _context.Funcionarios.Update(funcionario);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Excluir(Funcionario funcionario)
+        public async Task ExcluirAsync(Funcionario funcionario)
         {
             _context.Funcionarios.Remove(funcionario);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Funcionario?> SelecionarPorId(Guid id)
+        public async Task<Funcionario?> SelecionarPorIdAsync(Guid id)
         {
             return await _context.Funcionarios
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Funcionario?> BuscarPorEmail(string email)
+        public async Task<Funcionario?> BuscarPorEmailAsync(string email)
         {
             return await _context.Funcionarios
                 .FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public async Task<List<Funcionario>> SelecionarTodos()
+        public async Task<List<Funcionario>> SelecionarTodosAsync()
         {
             return await _context.Funcionarios
                 .OrderBy(x => x.Nome)

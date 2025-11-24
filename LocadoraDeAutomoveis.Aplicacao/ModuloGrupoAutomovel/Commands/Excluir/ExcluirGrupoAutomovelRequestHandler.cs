@@ -13,12 +13,12 @@ public class ExcluirGrupoAutomovelRequestHandler
 
     public async Task<object> Handle(ExcluirGrupoAutomovelRequest request)
     {
-        var grupo = await _repository.SelecionarPorId(request.Id);
+        var grupo = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (grupo == null)
             return GrupoAutomovelErrorResults.GrupoNaoEncontrado;
 
-        await _repository.Excluir(grupo);
+        await _repository.ExcluirAsync(grupo);
 
         return new { Mensagem = "Grupo excluído com sucesso." };
     }

@@ -14,7 +14,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodo
 
         public async Task<IEnumerable<DevolucaoDto>> Handle(SelecionarTodasDevolucoesRequest request)
         {
-            var lista = await _repository.SelecionarTodos();
+            var lista = await _repository.SelecionarTodosAsync();
 
             return lista.Select(d => new DevolucaoDto
             {
