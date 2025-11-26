@@ -3,6 +3,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarTodos;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApi.Controllers
@@ -11,32 +12,18 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
     [Route("api/funcionarios")]
     public class FuncionarioController : ControllerBase
     {
-        private readonly CriarFuncionarioRequestHandler _criarHandler;
-        private readonly EditarFuncionarioRequestHandler _editarHandler;
-        private readonly ExcluirFuncionarioRequestHandler _excluirHandler;
-        private readonly SelecionarFuncionarioPorIdRequestHandler _selecionarPorIdHandler;
-        private readonly SelecionarTodosFuncionariosRequestHandler _selecionarTodosHandler;
+       
+        private readonly IMediator _mediator;
 
-        public FuncionarioController(
-            CriarFuncionarioRequestHandler criarHandler,
-            EditarFuncionarioRequestHandler editarHandler,
-            ExcluirFuncionarioRequestHandler excluirHandler,
-            SelecionarFuncionarioPorIdRequestHandler selecionarPorIdHandler,
-            SelecionarTodosFuncionariosRequestHandler selecionarTodosHandler
-        )
+        public FuncionarioController(IMediator mediator)
         {
-            _criarHandler = criarHandler;
-            _editarHandler = editarHandler;
-            _excluirHandler = excluirHandler;
-            _selecionarPorIdHandler = selecionarPorIdHandler;
-            _selecionarTodosHandler = selecionarTodosHandler;
+            _mediator = mediator;
         }
 
-        // POST: Criar funcionário
         [HttpPost("criar")]
         public async Task<IActionResult> Criar([FromBody] CriarFuncionarioRequest request)
         {
-            var resultado = await _criarHandler.Handle(request);
+            var resultado = await _mediator.Send(request);
 
             if (resultado is string msgErro && msgErro.Contains("não"))
                 return BadRequest(msgErro);
@@ -44,11 +31,10 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             return Ok(resultado);
         }
 
-        // PUT: Editar funcionário
         [HttpPut("editar")]
         public async Task<IActionResult> Editar([FromBody] EditarFuncionarioRequest request)
         {
-            var resultado = await _editarHandler.Handle(request);
+            var resultado = await _mediator.Send(request);
 
             if (resultado is string erro && erro.Contains("não encontrado"))
                 return NotFound(erro);
@@ -59,11 +45,10 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             return Ok(resultado);
         }
 
-        // DELETE: Excluir funcionário
         [HttpDelete("excluir/{id}")]
         public async Task<IActionResult> Excluir(Guid id)
         {
-            var resultado = await _excluirHandler.Handle(new ExcluirFuncionarioRequest { Id = id });
+            var resultado = await _mediator.Send(new ExcluirFuncionarioRequest { Id = id });
 
             if (resultado is string erro && erro.Contains("não encontrado"))
                 return NotFound(erro);
@@ -71,11 +56,10 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             return Ok(resultado);
         }
 
-        // GET: Selecionar funcionário por Id
         [HttpGet("{id}")]
         public async Task<IActionResult> SelecionarPorId(Guid id)
         {
-            var resultado = await _selecionarPorIdHandler.Handle(new SelecionarFuncionarioPorIdRequest { Id = id });
+            var resultado = await _mediator.Send(new SelecionarFuncionarioPorIdRequest { Id = id });
 
             if (resultado is string erro && erro.Contains("não encontrado"))
                 return NotFound(erro);
@@ -83,11 +67,10 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             return Ok(resultado);
         }
 
-        // GET: Selecionar todos
         [HttpGet]
         public async Task<IActionResult> SelecionarTodos()
         {
-            var resultado = await _selecionarTodosHandler.Handle();
+            var resultado = await _mediator.Send(new SelecionarFuncionarioPorIdRequest());
             return Ok(resultado);
         }
     }

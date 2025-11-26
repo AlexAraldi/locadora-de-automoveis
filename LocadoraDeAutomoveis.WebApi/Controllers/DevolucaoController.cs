@@ -2,6 +2,7 @@
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodos;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.WebApi.Controllers
 {
@@ -9,36 +10,29 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
     [Route("api/devolucoes")]
     public class DevolucaoController : ControllerBase
     {
-        private readonly RegistrarDevolucaoRequestHandler _registrarHandler;
-        private readonly SelecionarDevolucaoPorIdRequestHandler _porIdHandler;
-        private readonly SelecionarTodasDevolucoesRequestHandler _todosHandler;
+        private readonly IMediator _mediator;
 
-        public DevolucaoController(
-            RegistrarDevolucaoRequestHandler registrar,
-            SelecionarDevolucaoPorIdRequestHandler porId,
-            SelecionarTodasDevolucoesRequestHandler todos)
+        public DevolucaoController(IMediator mediator)
         {
-            _registrarHandler = registrar;
-            _porIdHandler = porId;
-            _todosHandler = todos;
+            _mediator = mediator;
         }
 
         [HttpPost("registrar")]
         public async Task<IActionResult> Registrar([FromBody] RegistrarDevolucaoRequest request)
         {
-            return Ok(await _registrarHandler.Handle(request));
+            return Ok(await _mediator.Send(request));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> SelecionarPorId(Guid id)
         {
-            return Ok(await _porIdHandler.Handle(new SelecionarDevolucaoPorIdRequest { Id = id }));
+            return Ok(await _mediator.Send(new SelecionarDevolucaoPorIdRequest { Id = id }));
         }
 
         [HttpGet("todos")]
         public async Task<IActionResult> SelecionarTodos()
         {
-            return Ok(await _todosHandler.Handle(new SelecionarTodasDevolucoesRequest()));
+            return Ok(await _mediator.Send(new SelecionarTodasDevolucoesRequest()));
         }
     }
 }

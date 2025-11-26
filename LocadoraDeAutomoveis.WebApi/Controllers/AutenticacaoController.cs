@@ -1,5 +1,6 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Registrar;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraAutomoveis.WebApi.Controllers
@@ -8,17 +9,17 @@ namespace LocadoraAutomoveis.WebApi.Controllers
     [Route("api/autenticacao")]
     public class AutenticacaoController : ControllerBase
     {
-        private readonly AutenticarUsuarioRequestHandler _handler;
+        private readonly IMediator _mediator;
 
-        public AutenticacaoController(AutenticarUsuarioRequestHandler handler)
+        public AutenticacaoController(IMediator mediator)
         {
-            _handler = handler;
+            _mediator = mediator;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(AutenticarUsuarioRequest request)
         {
-            var response = await _handler.Handle(request);
+            var response = await _mediator.Send(request);
             return Ok(response);
         }
 
@@ -27,7 +28,7 @@ namespace LocadoraAutomoveis.WebApi.Controllers
         public async Task<IActionResult> Registrar([FromBody] RegistrarUsuarioRequest request)
         {
             var handler = HttpContext.RequestServices.GetRequiredService<RegistrarUsuarioRequestHandler>();
-            var resposta = await handler.Handle(request);
+            var resposta = await _mediator.Send(request);
 
             return Ok(resposta);
         }

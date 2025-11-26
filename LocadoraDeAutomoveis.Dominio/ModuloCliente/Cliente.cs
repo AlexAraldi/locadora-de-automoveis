@@ -1,6 +1,6 @@
 ﻿namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
 {
-    public class Cliente
+    public class Cliente 
     {
         public Guid Id { get; set; }
 

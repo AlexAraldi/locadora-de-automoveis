@@ -3,6 +3,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarTodos;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApi.Controllers
@@ -11,37 +12,24 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
     [Route("api/grupos")]
     public class GrupoAutomovelController : ControllerBase
     {
-        private readonly CriarGrupoAutomovelRequestHandler _criarHandler;
-        private readonly EditarGrupoAutomovelRequestHandler _editarHandler;
-        private readonly ExcluirGrupoAutomovelRequestHandler _excluirHandler;
-        private readonly SelecionarGrupoAutomovelPorIdRequestHandler _selecionarPorIdHandler;
-        private readonly SelecionarTodosGruposAutomovelRequestHandler _selecionarTodosHandler;
+        private readonly IMediator _mediator;
 
-        public GrupoAutomovelController(
-            CriarGrupoAutomovelRequestHandler criarHandler,
-            EditarGrupoAutomovelRequestHandler editarHandler,
-            ExcluirGrupoAutomovelRequestHandler excluirHandler,
-            SelecionarGrupoAutomovelPorIdRequestHandler selecionarPorIdHandler,
-            SelecionarTodosGruposAutomovelRequestHandler selecionarTodosHandler)
+        public GrupoAutomovelController(IMediator mediator)
         {
-            _criarHandler = criarHandler;
-            _editarHandler = editarHandler;
-            _excluirHandler = excluirHandler;
-            _selecionarPorIdHandler = selecionarPorIdHandler;
-            _selecionarTodosHandler = selecionarTodosHandler;
+            _mediator = mediator;
         }
 
         [HttpPost("criar")]
         public async Task<IActionResult> Criar([FromBody] CriarGrupoAutomovelRequest request)
         {
-            var resultado = await _criarHandler.Handle(request);
+            var resultado = await _mediator.Send(request);
             return Ok(resultado);
         }
 
         [HttpPut("editar")]
         public async Task<IActionResult> Editar([FromBody] EditarGrupoAutomovelRequest request)
         {
-            var resultado = await _editarHandler.Handle(request);
+            var resultado = await _mediator.Send(request);
             return Ok(resultado);
         }
 
@@ -49,7 +37,8 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
         public async Task<IActionResult> Excluir(Guid id)
         {
             var request = new ExcluirGrupoAutomovelRequest { Id = id };
-            var resultado = await _excluirHandler.Handle(request);
+
+            var resultado = await _mediator.Send(request);
             return Ok(resultado);
         }
 
@@ -57,7 +46,7 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
         public async Task<IActionResult> SelecionarPorId(Guid id)
         {
             var request = new SelecionarGrupoAutomovelPorIdRequest { Id = id };
-            var resultado = await _selecionarPorIdHandler.Handle(request);
+            var resultado = await _mediator.Send(request);
             return Ok(resultado);
         }
 
@@ -65,7 +54,7 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
         public async Task<IActionResult> SelecionarTodos()
         {
             var request = new SelecionarTodosGruposAutomovelRequest();
-            var resultado = await _selecionarTodosHandler.Handle(request);
+            var resultado = await _mediator.Send(request);
             return Ok(resultado);
         }
     }
