@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
+﻿using MediatR;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
 {
-    public class EditarFuncionarioRequest
+    public class EditarFuncionarioRequest : IRequest<object>
     {
         public Guid Id { get; set; }
         public string Nome { get; set; } = string.Empty;

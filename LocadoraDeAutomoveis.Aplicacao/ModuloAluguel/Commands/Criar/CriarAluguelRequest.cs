@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Criar;
+﻿using MediatR;
 
-public class CriarAluguelRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Criar;
+
+public class CriarAluguelRequest : IRequest<object>
 {
     public Guid ClienteId { get; set; }
     public Guid CondutorId { get; set; }

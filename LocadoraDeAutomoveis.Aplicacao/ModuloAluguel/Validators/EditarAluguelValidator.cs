@@ -10,6 +10,7 @@ public class EditarAluguelValidator : AbstractValidator<EditarAluguelRequest>
         RuleFor(x => x.Id)
             .NotEqual(Guid.Empty).WithMessage("Id é obrigatório.");
 
-        Include(new CriarAluguelValidator());
+        
+
     }
 }

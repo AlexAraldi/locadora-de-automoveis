@@ -1,3 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarTodos;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.DTOs;
+using MediatR;
 
-public class SelecionarTodosGruposAutomovelRequest { }
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarTodos;
+
+public class SelecionarTodosGruposAutomovelRequest : IRequest<IEnumerable<GrupoAutomovelDto>>
+{ 
+}

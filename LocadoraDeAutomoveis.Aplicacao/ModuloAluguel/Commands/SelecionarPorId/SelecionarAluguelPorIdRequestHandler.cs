@@ -1,9 +1,10 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.DTOs;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarPorId;
 
-public class SelecionarAluguelPorIdRequestHandler
+public class SelecionarAluguelPorIdRequestHandler : IRequestHandler<SelecionarAluguelPorIdRequest,object > 
 {
     private readonly IAluguelRepository _repository;
 
@@ -12,7 +13,7 @@ public class SelecionarAluguelPorIdRequestHandler
         _repository = repository;
     }
 
-    public async Task<object> Handle(SelecionarAluguelPorIdRequest request)
+    public async Task<object> Handle(SelecionarAluguelPorIdRequest request , CancellationToken cancellationToken)
     {
         var aluguel = await _repository.SelecionarPorIdAsync(request.Id);
 

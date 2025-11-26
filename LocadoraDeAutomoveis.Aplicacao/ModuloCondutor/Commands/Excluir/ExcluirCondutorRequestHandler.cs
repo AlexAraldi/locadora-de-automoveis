@@ -1,8 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
 
-public class ExcluirCondutorRequestHandler
+public class ExcluirCondutorRequestHandler : IRequestHandler<ExcluirCondutorRequest,object>
 {
     private readonly ICondutorRepository _repository;
 
@@ -11,7 +12,7 @@ public class ExcluirCondutorRequestHandler
         _repository = repository;
     }
 
-    public async Task<object> Handle(ExcluirCondutorRequest request)
+    public async Task<object> Handle(ExcluirCondutorRequest request, CancellationToken cancellationToken)
     {
         var condutor = await _repository.SelecionarPorIdAsync(request.Id);
         if (condutor == null)

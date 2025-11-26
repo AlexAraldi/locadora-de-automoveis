@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
+﻿using MediatR;
 
-public class ExcluirCondutorRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
+
+public class ExcluirCondutorRequest : IRequest<object>
 {
     public Guid Id { get; set; }
 }

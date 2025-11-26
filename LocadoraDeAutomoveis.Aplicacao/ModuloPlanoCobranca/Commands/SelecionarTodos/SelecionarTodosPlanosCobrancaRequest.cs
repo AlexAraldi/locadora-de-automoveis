@@ -1,3 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarTodos;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.DTOs;
+using MediatR;
 
-public class SelecionarTodosPlanosCobrancaRequest { }
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarTodos;
+
+public class SelecionarTodosPlanosCobrancaRequest : IRequest<IEnumerable<PlanoCobrancaDto>>
+{ 
+}

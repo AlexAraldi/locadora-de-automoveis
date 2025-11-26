@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
+﻿using MediatR;
 
-public class SelecionarCondutorPorIdRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
+
+public class SelecionarCondutorPorIdRequest : IRequest<object>
 {
     public Guid Id { get; set; }
 }

@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Criar;
+﻿using MediatR;
 
-public class CriarGrupoAutomovelRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Criar;
+
+public class CriarGrupoAutomovelRequest : IRequest<object>
 {
     public string Nome { get; set; }
 }

@@ -1,9 +1,10 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Validators;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Editar;
 
-public class EditarGrupoAutomovelRequestHandler
+public class EditarGrupoAutomovelRequestHandler : IRequestHandler<EditarGrupoAutomovelRequest, object>
 {
     private readonly IGrupoAutomovelRepository _repository;
     private readonly EditarGrupoAutomovelValidator _validator;
@@ -14,7 +15,7 @@ public class EditarGrupoAutomovelRequestHandler
         _validator = new EditarGrupoAutomovelValidator();
     }
 
-    public async Task<object> Handle(EditarGrupoAutomovelRequest request)
+    public async Task<object> Handle(EditarGrupoAutomovelRequest request, CancellationToken cancellationToken)
     {
         var validation = _validator.Validate(request);
         if (!validation.IsValid)

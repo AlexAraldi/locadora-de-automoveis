@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Editar;
+﻿using MediatR;
 
-public class EditarCondutorRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Editar;
+
+public class EditarCondutorRequest : IRequest<object>
 {
     public Guid Id { get; set; }
     public Guid ClienteId { get; set; }

@@ -12,7 +12,13 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.SelecionarTo
         public async Task<List<TaxaServicoDto>> Handle(SelecionarTodasTaxasServicoRequest request, CancellationToken cancellationToken)
         {
             var taxas = await _repo.SelecionarTodosAsync();
-            return taxas.Select(t => new TaxaServicoDto { Id = t.Id, Nome = t.Nome, Valor = t.Valor, TipoCalculo = t.TipoCalculo }).ToList();
+            return taxas.Select(t => new TaxaServicoDto 
+            { 
+                Id = t.Id, 
+                Nome = t.Nome, 
+                Valor = t.Valor, 
+                TipoCalculo = t.TipoCalculo 
+            }).ToList();
         }
     }
 }

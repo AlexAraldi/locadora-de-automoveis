@@ -1,8 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar
 {
-    public class RegistrarDevolucaoRequest
+    public class RegistrarDevolucaoRequest : IRequest<object>
     {
         public Guid AluguelId { get; set; }
         public DateTime DataDevolucao { get; set; }

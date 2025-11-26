@@ -2,11 +2,12 @@
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.DTOs;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Service;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAutenticacao.Repositories;
+using MediatR;
 using BC = BCrypt.Net.BCrypt;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar
 {
-    public class AutenticarUsuarioRequestHandler
+    public class AutenticarUsuarioRequestHandler : IRequestHandler< AutenticarUsuarioRequest, object>
     {
         private readonly UsuarioRepository _repository;
         private readonly JwtService _jwtService;
@@ -22,7 +23,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar
             _validator = validator;
         }
 
-        public async Task<object> Handle(AutenticarUsuarioRequest request)
+        public async Task<object> Handle(AutenticarUsuarioRequest request,CancellationToken cancellationToken)
         {
             var validation = await _validator.ValidateAsync(request);
 

@@ -1,8 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Editar;
 
-public class EditarPlanoCobrancaRequest
+public class EditarPlanoCobrancaRequest : IRequest<object>
 {
     public Guid Id { get; set; }
     public Guid GrupoAutomovelId { get; set; }

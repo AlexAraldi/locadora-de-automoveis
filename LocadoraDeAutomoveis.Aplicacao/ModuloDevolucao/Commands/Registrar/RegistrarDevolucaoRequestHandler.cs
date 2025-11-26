@@ -4,10 +4,11 @@ using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.DTOs;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Validators;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar
 {
-    public class RegistrarDevolucaoRequestHandler
+    public class RegistrarDevolucaoRequestHandler : IRequestHandler<RegistrarDevolucaoRequest,object>
     {
         private readonly IDevolucaoRepository _devolucaoRepository;
         private readonly IAluguelRepository _aluguelRepository;
@@ -27,7 +28,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar
             _validator = new RegistrarDevolucaoValidator();
         }
 
-        public async Task<object> Handle(RegistrarDevolucaoRequest request)
+        public async Task<object> Handle(RegistrarDevolucaoRequest request, CancellationToken cancellationToken)
         {
             var validation = _validator.Validate(request);
             if (!validation.IsValid)

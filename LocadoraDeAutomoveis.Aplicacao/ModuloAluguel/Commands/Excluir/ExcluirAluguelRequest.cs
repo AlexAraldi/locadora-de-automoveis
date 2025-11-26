@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Excluir;
+﻿using MediatR;
 
-public class ExcluirAluguelRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Excluir;
+
+public class ExcluirAluguelRequest : IRequest<object>
 {
     public Guid Id { get; set; }
 }

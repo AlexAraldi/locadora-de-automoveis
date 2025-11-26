@@ -1,3 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.DTOs;
+using MediatR;
 
-public class SelecionarTodosCondutoresRequest { }
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
+
+public class SelecionarTodosCondutoresRequest : IRequest<IEnumerable<CondutorDto>>
+{
+}

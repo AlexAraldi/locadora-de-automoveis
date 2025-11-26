@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPorId
+﻿using MediatR;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPorId
 {
-    public class SelecionarFuncionarioPorIdRequest
+    public class SelecionarFuncionarioPorIdRequest : IRequest <object>
     {
         public Guid Id { get; set; }
     }

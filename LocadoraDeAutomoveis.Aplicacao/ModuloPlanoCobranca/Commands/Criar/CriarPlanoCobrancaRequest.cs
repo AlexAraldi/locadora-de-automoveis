@@ -1,8 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Criar;
 
-public class CriarPlanoCobrancaRequest
+public class CriarPlanoCobrancaRequest : IRequest<object>
 {
     public Guid GrupoAutomovelId { get; set; }
     public TipoPlano TipoPlano { get; set; }

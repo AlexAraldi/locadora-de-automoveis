@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Excluir;
+﻿using MediatR;
 
-public class ExcluirPlanoCobrancaRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Excluir;
+
+public class ExcluirPlanoCobrancaRequest : IRequest<object>
 {
     public Guid Id { get; set; }
 }

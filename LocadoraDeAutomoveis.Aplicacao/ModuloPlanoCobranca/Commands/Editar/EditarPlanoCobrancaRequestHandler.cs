@@ -2,10 +2,11 @@
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Validators;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Editar;
 
-public class EditarPlanoCobrancaRequestHandler
+public class EditarPlanoCobrancaRequestHandler : IRequestHandler<EditarPlanoCobrancaRequest,object>
 {
     private readonly IPlanoCobrancaRepository _repository;
     private readonly IGrupoAutomovelRepository _grupoRepository;
@@ -20,7 +21,7 @@ public class EditarPlanoCobrancaRequestHandler
         _validator = new EditarPlanoCobrancaValidator();
     }
 
-    public async Task<object> Handle(EditarPlanoCobrancaRequest request)
+    public async Task<object> Handle(EditarPlanoCobrancaRequest request, CancellationToken cancellationToken)
     {
         var validation = _validator.Validate(request);
         if (!validation.IsValid)

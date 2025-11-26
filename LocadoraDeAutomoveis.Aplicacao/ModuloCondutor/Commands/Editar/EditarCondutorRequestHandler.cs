@@ -1,10 +1,11 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Validators;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Editar;
 
-public class EditarCondutorRequestHandler
+public class EditarCondutorRequestHandler : IRequestHandler<EditarCondutorRequest, object>
 {
     private readonly ICondutorRepository _repository;
     private readonly IClienteRepository _clienteRepository;
@@ -19,7 +20,7 @@ public class EditarCondutorRequestHandler
         _validator = new EditarCondutorValidator();
     }
 
-    public async Task<object> Handle(EditarCondutorRequest request)
+    public async Task<object> Handle(EditarCondutorRequest request, CancellationToken cancellationToken)
     {
         var validation = _validator.Validate(request);
         if (!validation.IsValid)

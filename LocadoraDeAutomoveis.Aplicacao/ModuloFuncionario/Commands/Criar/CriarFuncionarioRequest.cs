@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
+﻿using MediatR;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
 {
-    public class CriarFuncionarioRequest
+    public class CriarFuncionarioRequest : IRequest<object>
     {
         public string Nome { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

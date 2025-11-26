@@ -1,8 +1,9 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.DTOs;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+using MediatR;
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarPorId;
 
-public class SelecionarPlanoCobrancaPorIdRequestHandler
+public class SelecionarPlanoCobrancaPorIdRequestHandler : IRequestHandler<SelecionarPlanoCobrancaPorIdRequest,object>
 {
     private readonly IPlanoCobrancaRepository _repository;
 
@@ -11,7 +12,7 @@ public class SelecionarPlanoCobrancaPorIdRequestHandler
         _repository = repository;
     }
 
-    public async Task<object> Handle(SelecionarPlanoCobrancaPorIdRequest request)
+    public async Task<object> Handle(SelecionarPlanoCobrancaPorIdRequest request, CancellationToken cancellationToken)
     {
         var plano = await _repository.SelecionarPorIdAsync(request.Id);
 

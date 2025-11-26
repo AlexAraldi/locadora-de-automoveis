@@ -1,4 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodos
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.DTOs;
+using MediatR;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodos
 {
-    public class SelecionarTodasDevolucoesRequest { }
+    public class SelecionarTodasDevolucoesRequest : IRequest<IEnumerable<DevolucaoDto>>
+    {
+    }
 }

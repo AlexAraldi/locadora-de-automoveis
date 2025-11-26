@@ -1,3 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarTodos;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.DTOs;
+using MediatR;
 
-public class SelecionarTodosAlugueisRequest { }
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarTodos;
+
+public class SelecionarTodosAlugueisRequest : IRequest<IEnumerable<AluguelDto>>
+{
+}

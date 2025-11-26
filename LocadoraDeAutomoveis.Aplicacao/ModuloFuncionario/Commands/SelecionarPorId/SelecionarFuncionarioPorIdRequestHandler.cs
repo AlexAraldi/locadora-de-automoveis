@@ -1,9 +1,10 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.DTOs;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPorId
 {
-    public class SelecionarFuncionarioPorIdRequestHandler
+    public class SelecionarFuncionarioPorIdRequestHandler : IRequestHandler<SelecionarFuncionarioPorIdRequest, object>
     {
         private readonly IFuncionarioRepository _repository;
 
@@ -12,7 +13,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarPo
             _repository = repository;
         }
 
-        public async Task<object> Handle(SelecionarFuncionarioPorIdRequest request)
+        public async Task<object> Handle(SelecionarFuncionarioPorIdRequest request, CancellationToken cancellationToken)
         {
             var funcionario = await _repository.SelecionarPorIdAsync(request.Id);
 

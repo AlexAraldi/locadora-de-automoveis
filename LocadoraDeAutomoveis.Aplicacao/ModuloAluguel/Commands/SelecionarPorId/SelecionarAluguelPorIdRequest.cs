@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarPorId;
+﻿using MediatR;
 
-public class SelecionarAluguelPorIdRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarPorId;
+
+public class SelecionarAluguelPorIdRequest : IRequest<object>
 {
     public Guid Id { get; set; }
 }

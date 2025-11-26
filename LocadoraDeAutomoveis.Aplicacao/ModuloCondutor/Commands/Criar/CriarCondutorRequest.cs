@@ -1,6 +1,8 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Criar;
+﻿using MediatR;
 
-public class CriarCondutorRequest
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Criar;
+
+public class CriarCondutorRequest : IRequest<object>
 {
     public Guid ClienteId { get; set; }
     public string Nome { get; set; } = string.Empty;

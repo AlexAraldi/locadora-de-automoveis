@@ -5,10 +5,11 @@ using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Criar;
 
-public class CriarAluguelRequestHandler
+public class CriarAluguelRequestHandler : IRequestHandler< CriarAluguelRequest,object>
 {
     private readonly IAluguelRepository _repository;
     private readonly IClienteRepository _clienteRepository;
@@ -37,7 +38,7 @@ public class CriarAluguelRequestHandler
         _validator = new CriarAluguelValidator();
     }
 
-    public async Task<object> Handle(CriarAluguelRequest request)
+    public async Task<object> Handle(CriarAluguelRequest request, CancellationToken cancellationToken)
     {
         var validation = _validator.Validate(request);
         if (!validation.IsValid)

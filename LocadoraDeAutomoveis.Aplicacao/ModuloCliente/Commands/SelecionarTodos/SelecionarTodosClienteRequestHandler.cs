@@ -1,9 +1,10 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloCliente.DTOs;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.SelecionarTodos
 {
-    public class SelecionarTodosClientesRequestHandler
+    public class SelecionarTodosClientesRequestHandler : IRequestHandler<SelecionarTodosClientesRequest,IEnumerable<ClienteDto>>
     {
         private readonly IClienteRepository _repository;
 
@@ -12,7 +13,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.SelecionarTodos
             _repository = repository;
         }
 
-        public async Task<IEnumerable<ClienteDto>> Handle(SelecionarTodosClientesRequest request)
+        public async Task<IEnumerable<ClienteDto>> Handle(SelecionarTodosClientesRequest request, CancellationToken cancellationToken)
         {
             var clientes = await _repository.SelecionarTodosAsync();
 

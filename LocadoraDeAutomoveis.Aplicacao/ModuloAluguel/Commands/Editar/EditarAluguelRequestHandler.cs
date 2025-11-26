@@ -1,9 +1,10 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Validators;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Editar;
 
-public class EditarAluguelRequestHandler
+public class EditarAluguelRequestHandler : IRequestHandler<EditarAluguelRequest, object>
 {
     private readonly IAluguelRepository _repository;
     private readonly EditarAluguelValidator _validator;
@@ -14,7 +15,7 @@ public class EditarAluguelRequestHandler
         _validator = new EditarAluguelValidator();
     }
 
-    public async Task<object> Handle(EditarAluguelRequest request)
+    public async Task<object> Handle(EditarAluguelRequest request, CancellationToken cancellationToken)
     {
         var validation = _validator.Validate(request);
         if (!validation.IsValid)

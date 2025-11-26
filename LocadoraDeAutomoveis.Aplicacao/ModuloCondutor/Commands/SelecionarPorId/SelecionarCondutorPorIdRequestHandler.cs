@@ -1,9 +1,10 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.DTOs;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
 
-public class SelecionarCondutorPorIdRequestHandler
+public class SelecionarCondutorPorIdRequestHandler : IRequestHandler<SelecionarCondutorPorIdRequest,object>
 {
     private readonly ICondutorRepository _repository;
 
@@ -12,7 +13,7 @@ public class SelecionarCondutorPorIdRequestHandler
         _repository = repository;
     }
 
-    public async Task<object> Handle(SelecionarCondutorPorIdRequest request)
+    public async Task<object> Handle(SelecionarCondutorPorIdRequest request, CancellationToken cancellationToken)
     {
         var condutor = await _repository.SelecionarPorIdAsync(request.Id);
 

@@ -1,10 +1,11 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.DTOs;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Validators;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
+using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
 {
-    public class EditarFuncionarioRequestHandler
+    public class EditarFuncionarioRequestHandler : IRequestHandler<EditarFuncionarioRequest,object>
     {
         private readonly IFuncionarioRepository _repository;
         private readonly EditarFuncionarioValidator _validator;
@@ -15,7 +16,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Editar
             _validator = new EditarFuncionarioValidator();
         }
 
-        public async Task<object> Handle(EditarFuncionarioRequest request)
+        public async Task<object> Handle(EditarFuncionarioRequest request, CancellationToken cancellationToken)
         {
             var validation = _validator.Validate(request);
             if (!validation.IsValid)
