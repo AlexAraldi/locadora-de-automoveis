@@ -6,9 +6,9 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
     public class CriarClienteRequest : IRequest<object>
     {
         public TipoCliente Tipo { get; set; } 
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Telefone { get; set; }
+        public string? Nome { get; set; }
+        public string? Email { get; set; }
+        public string? Telefone { get; set; }
 
         // PF
         public string? Cpf { get; set; }

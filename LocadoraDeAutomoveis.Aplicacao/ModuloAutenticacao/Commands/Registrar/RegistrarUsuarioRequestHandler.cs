@@ -1,31 +1,37 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Validators;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAutenticacao.Repositories;
-using BC = BCrypt.Net.BCrypt;
 using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using FluentResults;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Registrar
 {
-    public class RegistrarUsuarioRequestHandler
+    public class RegistrarUsuarioRequestHandler : IRequestHandler<RegistrarUsuarioRequest, object>
     {
-        private readonly UsuarioRepository _repository;
+        private readonly UserManager<Usuario> _userManager;
         private readonly RegistrarUsuarioValidator _validator;
+        private readonly RoleManager<Cargo> _roleManager;
 
         public RegistrarUsuarioRequestHandler(
-            UsuarioRepository repository,
-            RegistrarUsuarioValidator validator)
+          UserManager<Usuario> userManager,
+          RegistrarUsuarioValidator validator,            
+          RoleManager<Cargo> roleManager
+        )
         {
-            _repository = repository;
+            _userManager = userManager;
             _validator = validator;
+            _roleManager = roleManager;
         }
 
-        public async Task<object> Handle(RegistrarUsuarioRequest request)
+        public async Task<object> Handle(RegistrarUsuarioRequest request, CancellationToken cancellationToken)
         {
             var validation = _validator.Validate(request);
             if (!validation.IsValid)
                 return validation.Errors.Select(x => x.ErrorMessage);
 
             // Já existe usuário com este e-mail?
-            var existente = await _repository.BuscarPorEmail(request.Email);
+            var existente = await _userManager.FindByEmailAsync(request.Email);
             if (existente != null)
                 return AutenticacaoErrorResults.EmailJaRegistrado;
 
@@ -33,20 +39,36 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Registrar
             var usuario = new Usuario
             {
                 Id = Guid.NewGuid(),
-                Nome = request.Nome,
                 Email = request.Email,
-                SenhaHash = BC.HashPassword(request.Senha),
-                Role = RoleUsuario.Funcionario 
+                UserName = request.Email
+
             };
+            await _userManager.CreateAsync(usuario, request.Senha);
 
+            var cargoStr = RoleUsuario.Empresa.ToString();
 
-            await _repository.Adicionar(usuario);
+            var resultadoBuscaCargo = await _roleManager.FindByNameAsync(cargoStr);
 
+            if (resultadoBuscaCargo is null)
+            {
+                var cargo = new Cargo()
+                {
+                    Name = cargoStr,
+                    NormalizedName = cargoStr.ToUpperInvariant(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                };
+
+                await _roleManager.CreateAsync(cargo);
+            }
+
+            await _userManager.AddToRoleAsync(usuario, cargoStr);
+         
             return new
             {
                 Mensagem = "Usuário registrado com sucesso.",
                 UsuarioId = usuario.Id
             };
+
         }
     }
 }

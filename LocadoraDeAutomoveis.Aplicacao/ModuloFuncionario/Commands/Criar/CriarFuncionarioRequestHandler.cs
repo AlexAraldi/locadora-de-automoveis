@@ -1,7 +1,11 @@
-﻿using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.DTOs;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Validators;
+using System.ComponentModel.DataAnnotations;
+using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.DTOs;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Validators;
+using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
 {
@@ -9,11 +13,23 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
     {
         private readonly IFuncionarioRepository _repository;
         private readonly CriarFuncionarioValidator _validator;
+        private readonly UserManager<Usuario> _userManager;
+        private readonly RoleManager<Cargo> _roleManager;
+        private readonly ITenantProvider _tenantProvider;
 
-        public CriarFuncionarioRequestHandler(IFuncionarioRepository repository)
+        public CriarFuncionarioRequestHandler(
+            IFuncionarioRepository repository, 
+            UserManager<Usuario> userManager, 
+            CriarFuncionarioValidator validator, 
+            RoleManager<Cargo> roleManager,
+            ITenantProvider tenantProvider
+        )
         {
             _repository = repository;
-            _validator = new CriarFuncionarioValidator();
+            _validator =  validator;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _tenantProvider = tenantProvider;
         }
 
         public async Task<object> Handle(CriarFuncionarioRequest request , CancellationToken cancellationToken)
@@ -26,6 +42,33 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
             if (existente != null)
                 return FuncionarioErrorResults.EmailJaCadastrado;
 
+            var usuario = new Usuario
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email,
+                UserName = request.Email
+
+            };
+            await _userManager.CreateAsync(usuario, request.Senha);
+
+            var cargoStr = RoleUsuario.Funcionario.ToString();
+
+            var resultadoBuscaCargo = await _roleManager.FindByNameAsync(cargoStr);
+
+            if (resultadoBuscaCargo is null)
+            {
+                var cargo = new Cargo()
+                {
+                    Name = cargoStr,
+                    NormalizedName = cargoStr.ToUpperInvariant(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                };
+
+                await _roleManager.CreateAsync(cargo);
+            }
+
+            await _userManager.AddToRoleAsync(usuario, cargoStr);
+
             var funcionario = new Funcionario
             {
                 Id = Guid.NewGuid(),
@@ -33,7 +76,9 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar
                 Email = request.Email,
                 Cargo = request.Cargo,
                 DataAdmissao = request.DataAdmissao,
-                Salario = request.Salario
+                Salario = request.Salario,
+                UsuarioId = usuario.Id,
+                EmpresaId = _tenantProvider.EmpresaId.GetValueOrDefault(),
             };
 
             await _repository.AdicionarAsync(funcionario);

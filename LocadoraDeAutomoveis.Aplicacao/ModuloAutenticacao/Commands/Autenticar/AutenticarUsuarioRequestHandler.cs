@@ -3,7 +3,6 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.DTOs;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Service;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAutenticacao.Repositories;
 using MediatR;
-using BC = BCrypt.Net.BCrypt;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar
 {
@@ -35,16 +34,14 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar
             if (usuario == null)
                 return AutenticacaoErrorResults.UsuarioNaoEncontrado;
 
-            if (!BC.Verify(request.Senha, usuario.SenhaHash))
-                return AutenticacaoErrorResults.CredenciaisInvalidas;
+           
 
             var token = _jwtService.GerarToken(usuario);
 
             var usuarioDto = new UsuarioAutenticadoDto
             {
                 Id = usuario.Id,
-                UserName = usuario.Nome,
-                Email = usuario.Email
+                
             };
 
             return new

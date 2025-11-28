@@ -9,9 +9,9 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Editar
         public Guid Id { get; set; }
 
         public int Tipo { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Telefone { get; set; }
+        public string? Nome { get; set; }
+        public string? Email { get; set; }
+        public string? Telefone { get; set; }
 
         // PF
         public string? Cpf { get; set; }
