@@ -92,6 +92,9 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Validators;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
+using System;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -153,6 +156,21 @@ builder.Services.AddDbContext<LocadoraDbContext>(options =>
 // ============================================================================
 // AUTENTICAÇÃO JWT
 // ============================================================================
+
+builder.Services.AddScoped<ITenantProvider, IdentityTenantProvider>();
+builder.Services.AddIdentity<Usuario, Cargo>(options =>
+{
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+})
+        .AddEntityFrameworkStores<LocadoraDbContext>()
+        .AddDefaultTokenProviders();
+
+
 builder.Services
     .AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -164,7 +182,7 @@ builder.Services
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
+            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT_GENERATION_KEY"])
             )
         };
     });
@@ -176,7 +194,7 @@ builder.Services.AddScoped<AutenticarUsuarioRequestHandler>();
 builder.Services.AddScoped<RegistrarUsuarioRequestHandler>();
 builder.Services.AddScoped<RegistrarUsuarioValidator>();
 builder.Services.AddValidatorsFromAssembly(typeof(AutenticarUsuarioRequest).Assembly);
-builder.Services.AddSingleton(new JwtService(builder.Configuration["Jwt:Key"]));
+builder.Services.AddScoped<JwtService>();
 
 // ============================================================================
 // FUNCIONÁRIO
@@ -260,7 +278,6 @@ builder.Services.AddScoped<EditarTaxaServicoRequestHandler>();
 builder.Services.AddScoped<ExcluirTaxaServicoRequestHandler>();
 builder.Services.AddScoped<SelecionarTaxaServicoPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodasTaxasServicoRequestHandler>();
-
 builder.Services.AddScoped<CriarTaxaServicoValidator>();
 builder.Services.AddScoped<EditarTaxaServicoValidator>();
 

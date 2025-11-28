@@ -5,11 +5,9 @@ namespace OrganizaMed.WebApi.Extensions;
 
 public static class ApiResponseExtensions
 {
-    public static IActionResult ToHttpResponse(this object objresultado)
+    public static IActionResult ToHttpResponse<TResponse>(this Result<TResponse> resultado)
     {
-        var resultado = objresultado as Result;
-
-        if (resultado != null && resultado.IsFailed)
+        if (resultado.IsFailed)
         {
             return new JsonResult(resultado.Errors.First().Reasons.Select(r => r.Message).ToList())
             {
@@ -17,7 +15,7 @@ public static class ApiResponseExtensions
             };
         }
 
-        return new JsonResult(resultado)
+        return new JsonResult(resultado.Value)
         {
             StatusCode = StatusCodes.Status200OK
         };

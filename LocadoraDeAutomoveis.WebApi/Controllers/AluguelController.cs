@@ -22,7 +22,7 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
 
             [HttpPost("criar")]
             public async Task<IActionResult> Criar([FromBody] CriarAluguelRequest request)
-            {
+            {                
                 var result = await _mediator.Send(request);
                 return Ok(result);
             }
