@@ -1,8 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 
-public class GrupoAutomovel
+namespace LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
+
+public class GrupoAutomovel: EntidadeBase<GrupoAutomovel>
 {
-    public Guid Id { get; private set; }
     public string Nome { get; private set; } = string.Empty;
 
     public GrupoAutomovel() { }

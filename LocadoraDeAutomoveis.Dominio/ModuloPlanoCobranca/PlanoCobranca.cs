@@ -1,8 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 
-public class PlanoCobranca
+namespace LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
+
+public class PlanoCobranca : EntidadeBase<PlanoCobranca>
 {
-    public Guid Id { get; private set; }
 
     public Guid GrupoAutomovelId { get; private set; }
 

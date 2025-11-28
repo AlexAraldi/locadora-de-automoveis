@@ -1,8 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloTaxaServico
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
+
+namespace LocadoraDeAutomoveis.Dominio.ModuloTaxaServico
 {
-    public class TaxaServico
+    public class TaxaServico : EntidadeBase<TaxaServico>
     {
-        public Guid Id { get; private set; }
         public string Nome { get; private set; }
         public decimal Valor { get; private set; }
         public TipoCalculoTaxa TipoCalculo { get; private set; }

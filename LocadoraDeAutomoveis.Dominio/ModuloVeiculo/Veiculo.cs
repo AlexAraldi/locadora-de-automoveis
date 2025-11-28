@@ -1,9 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 
-public class Veiculo
+namespace LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
+
+public class Veiculo : EntidadeBase<Veiculo>
 {
-    public Guid Id { get; private set; }
-
     public string Modelo { get; private set; } = string.Empty;
     public string Marca { get; private set; } = string.Empty;
     public int Ano { get; private set; }

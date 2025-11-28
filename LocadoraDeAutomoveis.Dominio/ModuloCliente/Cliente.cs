@@ -1,9 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
-{
-    public class Cliente 
-    {
-        public Guid Id { get; set; }
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 
+namespace LocadoraDeAutomoveis.Dominio.ModuloCliente
+{
+    public class Cliente : EntidadeBase<Cliente>    
+    {
         // Tipo: PF ou PJ
         public TipoCliente Tipo { get; set; }
 

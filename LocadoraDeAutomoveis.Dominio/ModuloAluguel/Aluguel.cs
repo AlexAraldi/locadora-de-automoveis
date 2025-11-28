@@ -1,8 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 
-public class Aluguel
+namespace LocadoraDeAutomoveis.Dominio.ModuloAluguel;
+
+public class Aluguel : EntidadeBase<Aluguel>
 {
-    public Guid Id { get; private set; }
 
     public Guid ClienteId { get; private set; }
     public Guid CondutorId { get; private set; }

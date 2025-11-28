@@ -1,8 +1,9 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+﻿using LocadoraDeAutomoveis.Dominio.Compartilhado;
 
-public class Condutor
+namespace LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+
+public class Condutor :EntidadeBase<Condutor>
 {
-    public Guid Id { get; private set; }
     public Guid ClienteId { get; private set; }
     public string Nome { get; private set; } = string.Empty;
     public string Cpf { get; private set; } = string.Empty;
