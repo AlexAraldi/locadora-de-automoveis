@@ -17,7 +17,7 @@ public class TaxaServicoConfiguration : IEntityTypeConfiguration<TaxaServico>
             .HasMaxLength(100);
 
         builder.Property(x => x.Valor)
-            .IsRequired();
+            .HasPrecision(18, 2);
 
         builder.Property(x => x.TipoCalculo)
             .IsRequired();

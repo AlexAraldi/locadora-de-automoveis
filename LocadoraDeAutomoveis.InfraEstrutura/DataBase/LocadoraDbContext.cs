@@ -3,26 +3,27 @@ using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
 using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
+using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
-using LocadoraDeAutomoveis.Infraestrutura.Database.Configuration;
-using LocadoraDeAutomoveis.InfraEstrutura.DataBase.Configuration;
-using LocadoraDeAutomoveis.InfraEstrutura.ModuloDevolucao.Configuration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
 {
-    public class LocadoraDbContext : DbContext
+    public class LocadoraDbContext : IdentityDbContext<Usuario, Cargo, Guid>
     {
-        public LocadoraDbContext(DbContextOptions<LocadoraDbContext> options)
+        private readonly ITenantProvider? tenantProvider;
+
+        public LocadoraDbContext(DbContextOptions<LocadoraDbContext> options, ITenantProvider? tenantProvider = null)
             : base(options)
         {
+            this.tenantProvider = tenantProvider;
         }
-
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Funcionario> Funcionarios { get; set; } 
+        public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<GrupoAutomovel> GruposAutomovel { get; set; }
@@ -32,27 +33,35 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Devolucao> Devolucoes { get; set; }
         public DbSet<TaxaServico> TaxasServico { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
-            base.OnModelCreating(modelBuilder);
+        
 
-            modelBuilder.ApplyConfiguration(new ClienteConfiguration());
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            if (tenantProvider is not null)
+            {
+                modelBuilder.Entity<Aluguel>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<Cliente>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<Condutor>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<Devolucao>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<Funcionario>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<GrupoAutomovel>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<PlanoCobranca>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<TaxaServico>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<Veiculo>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+            }
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LocadoraDbContext).Assembly);
 
-            modelBuilder.ApplyConfiguration(new VeiculoConfiguration());
-
-            modelBuilder.ApplyConfiguration(new GrupoAutomovelConfiguration());
-
-            modelBuilder.ApplyConfiguration(new CondutorConfiguration());
-
-            modelBuilder.ApplyConfiguration(new PlanoCobrancaConfiguration());
-
-            modelBuilder.ApplyConfiguration(new AluguelConfiguration());
-
-            modelBuilder.ApplyConfiguration(new DevolucaoConfiguration());
-
-            modelBuilder.ApplyConfiguration(new TaxaServicoConfiguration());
+            base.OnModelCreating(modelBuilder);
 
         }
     }

@@ -28,8 +28,9 @@ public class VeiculoConfiguration : IEntityTypeConfiguration<Veiculo>
             .HasMaxLength(10);
 
         builder.Property(x => x.Quilometragem)
-            .IsRequired()
-            .HasColumnType("decimal(10,2)");
+            .HasPrecision(18, 2)
+            .IsRequired();
+             
 
         builder.Property(x => x.Combustivel)
             .IsRequired()

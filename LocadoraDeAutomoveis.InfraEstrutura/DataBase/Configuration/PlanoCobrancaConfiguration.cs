@@ -19,17 +19,17 @@ public class PlanoCobrancaConfiguration : IEntityTypeConfiguration<PlanoCobranca
             .IsRequired();
 
         builder.Property(x => x.ValorDiaria)
-            .HasColumnType("decimal(18,2)")
+            .HasPrecision(18, 2)
             .IsRequired();
 
         builder.Property(x => x.ValorPorKm)
-            .HasColumnType("decimal(18,2)");
+            .HasPrecision(18, 2);
 
         builder.Property(x => x.KmLivre);
 
         builder.Property(x => x.KmControladoLimite);
 
         builder.Property(x => x.ValorExcedenteKm)
-            .HasColumnType("decimal(18,2)");
+            .HasPrecision(18, 2);
     }
 }

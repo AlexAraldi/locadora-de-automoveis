@@ -25,14 +25,14 @@ public class AluguelConfiguration : IEntityTypeConfiguration<Aluguel>
             .IsRequired();
 
         builder.Property(x => x.ValorPrevisto)
-            .HasColumnType("decimal(18,2)")
+             .HasPrecision(18, 2)
             .IsRequired();
 
         builder.Property(x => x.ValorFinal)
-            .HasColumnType("decimal(18,2)");
+             .HasPrecision(18, 2);
 
         builder.Property(x => x.ValorMultas)
-            .HasColumnType("decimal(18,2)");
+             .HasPrecision(18, 2);
 
         builder.Property(x => x.KmFinal);
 

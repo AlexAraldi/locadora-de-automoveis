@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LocadoraDeAutomoveis.InfraEstrutura.DataBase.Configuration
@@ -27,10 +28,13 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.DataBase.Configuration
                 .IsRequired();
 
             builder.Property(x => x.Salario)
-                .HasColumnType("decimal(10,2)")
+               .HasPrecision(18, 2)
                 .IsRequired();
 
-            
+            builder.HasOne(c => c.Usuario)
+               .WithOne()
+               .HasForeignKey<Funcionario>(f => f.UsuarioId)
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

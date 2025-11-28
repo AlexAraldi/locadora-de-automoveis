@@ -4,6 +4,7 @@ using LocadoraDeAutomoveis.Infraestrutura.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 {
     [DbContext(typeof(LocadoraDbContext))]
-    partial class LocadoraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251128190720_Update-Date")]
+    partial class UpdateDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
