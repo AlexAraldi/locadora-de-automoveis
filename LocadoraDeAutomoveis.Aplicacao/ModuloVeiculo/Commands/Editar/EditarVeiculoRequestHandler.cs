@@ -20,6 +20,7 @@ public class EditarVeiculoRequestHandler : IRequestHandler<EditarVeiculoRequest,
         if (!validation.IsValid)
             return validation.Errors.Select(x => x.ErrorMessage);
 
+
         var veiculo = await _repository.SelecionarPorIdAsync(request.Id);
 
         if (veiculo == null)

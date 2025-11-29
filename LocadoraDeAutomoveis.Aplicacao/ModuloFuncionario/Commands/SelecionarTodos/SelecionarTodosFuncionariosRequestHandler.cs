@@ -1,5 +1,4 @@
 ﻿using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.DTOs;
-using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using MediatR;
 
