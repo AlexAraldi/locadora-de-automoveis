@@ -53,6 +53,13 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
 
+// Configuração
+using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloConfiguracao.Repositories;
+using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Selecionar;
+
+
 // Plano de Cobrança
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloPlanoCobranca.Repositories;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
@@ -205,6 +212,15 @@ builder.Services.AddScoped<EditarFuncionarioRequestHandler>();
 builder.Services.AddScoped<ExcluirFuncionarioRequestHandler>();
 builder.Services.AddScoped<SelecionarFuncionarioPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosFuncionariosRequestHandler>();
+
+// ============================================================================
+// CONFIGURAÇÃO
+// ============================================================================
+builder.Services.AddScoped<IConfiguracaoRepository, ConfiguracaoRepository>();
+builder.Services.AddScoped<EditarConfiguracaoRequestHandler>();
+builder.Services.AddScoped<SelecionarConfiguracaoRequestHandler>();
+builder.Services.AddScoped<EditarConfiguracaoValidator>();
+
 
 // ============================================================================
 // CLIENTE
