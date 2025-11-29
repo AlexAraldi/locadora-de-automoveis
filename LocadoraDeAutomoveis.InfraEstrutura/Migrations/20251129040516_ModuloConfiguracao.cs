@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateDate : Migration
+    public partial class ModuloConfiguracao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -117,6 +117,22 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_Condutor", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_Configuracao",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PrecoGasolina = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    PrecoGas = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    PrecoDiesel = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    PrecoAlcool = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    EmpresaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_Configuracao", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -408,6 +424,9 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 
             migrationBuilder.DropTable(
                 name: "TB_Condutor");
+
+            migrationBuilder.DropTable(
+                name: "TB_Configuracao");
 
             migrationBuilder.DropTable(
                 name: "TB_Devolucao");

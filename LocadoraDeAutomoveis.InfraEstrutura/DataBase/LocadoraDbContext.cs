@@ -2,6 +2,7 @@
 using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.Dominio.ModuloCondutor;
+using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
 using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
@@ -32,8 +33,10 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Aluguel> Alugueis { get; set; }
         public DbSet<Devolucao> Devolucoes { get; set; }
         public DbSet<TaxaServico> TaxasServico { get; set; }
+        public DbSet<Configuracao> Configuracoes { get; set; }
 
-        
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -57,6 +60,9 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
                     .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
                 modelBuilder.Entity<Veiculo>()
                     .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+                modelBuilder.Entity<Configuracao>()
+                    .HasQueryFilter(f => f.EmpresaId == tenantProvider.EmpresaId.GetValueOrDefault());
+
             }
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LocadoraDbContext).Assembly);
