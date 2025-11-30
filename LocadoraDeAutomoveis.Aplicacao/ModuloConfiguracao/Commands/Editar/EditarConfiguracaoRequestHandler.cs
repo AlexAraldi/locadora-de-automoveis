@@ -1,10 +1,8 @@
-﻿using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
-using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Erros;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Validators;
 using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
 using MediatR;
-using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Validator;
 
-namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Editar;
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
 
 public class EditarConfiguracaoRequestHandler : IRequestHandler<EditarConfiguracaoRequest, object>
 {
@@ -21,24 +19,25 @@ public class EditarConfiguracaoRequestHandler : IRequestHandler<EditarConfigurac
     {
         var validation = _validator.Validate(request);
         if (!validation.IsValid)
-            return validation.Errors.Select(x => x.ErrorMessage);
+            return validation.Errors.Select(e => e.ErrorMessage);
 
-        var configuracao = await _repository.SelecionarAsync(request.Id);
-        if (configuracao == null)
+        var existente = await _repository.SelecionarAsync();
+        if (existente == null)
             return ConfiguracaoErrorResults.ConfiguracaoNaoEncontrada;
 
-        configuracao.Editar(
-            request.PrecoAlcool,
+        existente.Editar(
             request.PrecoGasolina,
-            request.PrecoDiesel,
-            request.PrecoGas       
+            request.PrecoGas,
+            request.PrecoAlcool,
+            request.PrecoDiesel
         );
-        await _repository.EditarAsync(configuracao);
 
-        return new { Mensagem = "Preço atualizado com sucesso." };
+        await _repository.EditarAsync(existente);
+
+        return new
+        {
+            Mensagem = "Configuração atualizada com sucesso.",
+            Id = existente.Id
+        };
     }
-
-
-
 }
-

@@ -1,10 +1,8 @@
-﻿using FluentResults;
+﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao;
 
-namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Erros
+public static class ConfiguracaoErrorResults
 {
-    public static class ConfiguracaoErrorResults
-    {
-        public static string ConfiguracaoNaoEncontrada ="A configuração não foi encontrada.";
-        
-    }
+    public static string ConfiguracaoNaoEncontrada => "Configuração não encontrada.";
+    public static string ConfiguracaoJaExiste => "Já existe configuração cadastrada.";
+    public static string DadosInvalidos => "Dados de configuração inválidos.";
 }

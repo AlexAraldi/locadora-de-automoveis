@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Selecionar
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Selecionar;
+
+public class SelecionarConfiguracaoRequest : IRequest<object>
 {
-    public class SelecionarConfiguracaoRequest : IRequest<object>
-    {
-    }
 }

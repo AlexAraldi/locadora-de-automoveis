@@ -1,10 +1,9 @@
 ﻿using MediatR;
 
-namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Criar;
 
-public class EditarConfiguracaoRequest : IRequest<object>
+public class CriarConfiguracaoRequest : IRequest<object>
 {
-    public Guid Id { get; set; }
     public decimal PrecoGasolina { get; set; }
     public decimal PrecoGas { get; set; }
     public decimal PrecoDiesel { get; set; }
