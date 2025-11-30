@@ -55,8 +55,6 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
 
 // Configuração
 using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
-using LocadoraDeAutomoveis.InfraEstrutura.ModuloConfiguracao.Repositories;
-using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Selecionar;
 
 
@@ -100,8 +98,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
-using System;
 using Microsoft.AspNetCore.Identity;
+using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
+using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Criar;
+using LocadoraDeAutomoveis.InfraEstrutura.ModuloConfiguracao.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -217,10 +218,9 @@ builder.Services.AddScoped<SelecionarTodosFuncionariosRequestHandler>();
 // CONFIGURAÇÃO
 // ============================================================================
 builder.Services.AddScoped<IConfiguracaoRepository, ConfiguracaoRepository>();
+builder.Services.AddScoped<CriarConfiguracaoRequestHandler>();
 builder.Services.AddScoped<EditarConfiguracaoRequestHandler>();
 builder.Services.AddScoped<SelecionarConfiguracaoRequestHandler>();
-builder.Services.AddScoped<EditarConfiguracaoValidator>();
-
 
 // ============================================================================
 // CLIENTE

@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Criar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Selecionar;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApi.Controllers
 {
@@ -16,26 +17,26 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             _mediator = mediator;
         }
 
-        // ======================================================================
-        // GET api/configuracoes
-        // Seleciona a configuração do sistema (sempre existe apenas 1 registro)
-        // ======================================================================
+        [HttpPost("criar")]
+        public async Task<IActionResult> Criar([FromBody] CriarConfiguracaoRequest request)
+        {
+            var resultado = await _mediator.Send(request);
+            return Ok(resultado);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Editar(Guid id, [FromBody] EditarConfiguracaoRequest request)
+        {
+            request.Id = id;
+            var resultado = await _mediator.Send(request);
+            return Ok(resultado);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Selecionar()
         {
-            var result = await _mediator.Send(new SelecionarConfiguracaoRequest());
-            return Ok(result);
-        }
-
-        // ======================================================================
-        // PUT api/configuracoes/editar
-        // Edita a configuração existente
-        // ======================================================================
-        [HttpPut("editar")]
-        public async Task<IActionResult> Editar([FromBody] EditarConfiguracaoRequest request)
-        {
-            var result = await _mediator.Send(request);
-            return Ok(result);
+            var resultado = await _mediator.Send(new SelecionarConfiguracaoRequest());
+            return Ok(resultado);
         }
     }
 }
