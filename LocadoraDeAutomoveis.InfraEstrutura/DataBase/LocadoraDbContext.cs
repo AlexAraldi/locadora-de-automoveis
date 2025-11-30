@@ -36,8 +36,6 @@ namespace LocadoraDeAutomoveis.Infraestrutura.DataBase
         public DbSet<Configuracao> Configuracoes { get; set; }
 
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             if (tenantProvider is not null)
