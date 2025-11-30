@@ -1,9 +1,10 @@
-﻿namespace LocadoraDeAutomoveis.Dominio.ModuloConfiguracao
+﻿using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
+
+namespace LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
+
+public interface IConfiguracaoRepository
 {
-    public interface IConfiguracaoRepository
-    {
-        Task<Configuracao> SelecionarAsync();
-        Task AdicionarAsync(Configuracao configuracao);
-        Task<bool> EditarAsync(Configuracao configuracao);
-    }
+    Task<Configuracao?> SelecionarAsync();
+    Task AdicionarAsync(Configuracao configuracao);
+    Task EditarAsync(Configuracao configuracao);
 }

@@ -11,17 +11,12 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloConfiguracao
 
         public Configuracao() { }
 
-        public void Editar(
-        
-            decimal precoGasolina,
-            decimal precoGas,
-            decimal precoAlcool,
-            decimal precoDiesel)
+        public void Editar(decimal precoGasolina, decimal precoGas, decimal precoAlcool, decimal precoDiesel)
         {
             PrecoGasolina = precoGasolina;
             PrecoGas = precoGas;
-            PrecoDiesel = precoDiesel;
             PrecoAlcool = precoAlcool;
+            PrecoDiesel = precoDiesel;
         }
     }
 }
