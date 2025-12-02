@@ -9,7 +9,7 @@ using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.Criar;
 
-public class CriarAluguelRequestHandler : IRequestHandler< CriarAluguelRequest,object>
+public class CriarAluguelRequestHandler : IRequestHandler<CriarAluguelRequest, object>
 {
     private readonly IAluguelRepository _repository;
     private readonly IClienteRepository _clienteRepository;
@@ -64,14 +64,19 @@ public class CriarAluguelRequestHandler : IRequestHandler< CriarAluguelRequest,o
         if (plano is null)
             return AluguelErrorResults.PlanoNaoEncontrado;
 
-        int dias = (request.DataPrevistaTermino - request.DataInicio).Days;
+        // 🔥 CÁLCULO DAS DIÁRIAS
+        int dias = (int)Math.Ceiling((request.DataPrevistaTermino - request.DataInicio).TotalDays);
         if (dias < 1) dias = 1;
 
+        // 🔥 CÁLCULO DO VALOR PREVISTO
         decimal valorPrevisto = plano.TipoPlano switch
         {
-            TipoPlano.Diario => (plano.ValorDiaria * dias),
-            TipoPlano.KmLivre => (plano.ValorDiaria * dias),
-            TipoPlano.KmControlado => (plano.ValorDiaria * dias),
+            TipoPlano.Diario => plano.ValorDiaria * dias,
+
+            TipoPlano.KmLivre => plano.ValorDiaria * dias,
+
+            TipoPlano.KmControlado => plano.ValorDiaria * dias, // excesso será cobrado na devolução
+
             _ => 0
         };
 

@@ -23,40 +23,40 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
         [HttpPost("criar")]
         public async Task<IActionResult> Criar([FromBody] CriarPlanoCobrancaRequest request)
         {
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpPut("editar")]
         public async Task<IActionResult> Editar([FromBody] EditarPlanoCobrancaRequest request)
         {
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpDelete("excluir/{id}")]
         public async Task<IActionResult> Excluir(Guid id)
         {
-            var resultado = await _mediator.Send(new ExcluirPlanoCobrancaRequest { Id = id });
-            return Ok(resultado);
+            var result = await _mediator.Send(new ExcluirPlanoCobrancaRequest { Id = id });
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> SelecionarPorId(Guid id)
         {
-            var resultado = await _mediator.Send(
+            var result = await _mediator.Send(
                 new SelecionarPlanoCobrancaPorIdRequest { Id = id });
 
-            return Ok(resultado);
+            return Ok(result);
         }
 
         [HttpGet("todos")]
         public async Task<IActionResult> SelecionarTodos()
         {
-            var resultado = await _mediator.Send(
+            var result = await _mediator.Send(
                 new SelecionarTodosPlanosCobrancaRequest());
 
-            return Ok(resultado);
+            return Ok(result);
         }
     }
 }

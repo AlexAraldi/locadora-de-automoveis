@@ -1,4 +1,5 @@
 ﻿using LocadoraDeAutomoveis.Dominio.ModuloCliente;
+using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
 using MediatR;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
@@ -6,10 +7,12 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
     public class CriarClienteRequestHandler : IRequestHandler<CriarClienteRequest, object>
     {
         private readonly IClienteRepository _repository;
+        private readonly ITenantProvider _tenantProvider;
 
-        public CriarClienteRequestHandler(IClienteRepository repository)
+        public CriarClienteRequestHandler(IClienteRepository repository, ITenantProvider tenantProvider)
         {
             _repository = repository;
+            _tenantProvider = tenantProvider;
         }
 
         public async Task<object> Handle(CriarClienteRequest request, CancellationToken cancellationToken)
@@ -32,6 +35,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
             var cliente = new Cliente
             {
                 Id = Guid.NewGuid(),
+                EmpresaId = _tenantProvider.EmpresaId!.Value,  
                 Tipo = (TipoCliente)request.Tipo,
                 Nome = request.Nome,
                 Email = request.Email,

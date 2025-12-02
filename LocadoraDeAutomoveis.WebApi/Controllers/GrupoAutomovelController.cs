@@ -3,6 +3,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Editar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.SelecionarTodos;
+using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.SelecionarTodos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,15 +23,15 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
         [HttpPost("criar")]
         public async Task<IActionResult> Criar([FromBody] CriarGrupoAutomovelRequest request)
         {
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpPut("editar")]
         public async Task<IActionResult> Editar([FromBody] EditarGrupoAutomovelRequest request)
         {
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpDelete("excluir/{id}")]
@@ -38,24 +39,24 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
         {
             var request = new ExcluirGrupoAutomovelRequest { Id = id };
 
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> SelecionarPorId(Guid id)
         {
             var request = new SelecionarGrupoAutomovelPorIdRequest { Id = id };
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpGet("todos")]
         public async Task<IActionResult> SelecionarTodos()
         {
-            var request = new SelecionarTodosGruposAutomovelRequest();
-            var resultado = await _mediator.Send(request);
-            return Ok(resultado);
+            var result = await _mediator.Send(
+                new SelecionarTodosGruposAutomovelRequest());
+            return Ok(result);
         }
     }
 }
