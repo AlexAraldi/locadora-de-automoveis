@@ -27,6 +27,7 @@ public class CriarVeiculoRequestHandler : IRequestHandler<CriarVeiculoRequest, o
             return VeiculoErrorResults.PlacaJaRegistrada;
 
         var v = new Veiculo(
+            request.Foto,
             request.Modelo,
             request.Marca,
             request.Ano,

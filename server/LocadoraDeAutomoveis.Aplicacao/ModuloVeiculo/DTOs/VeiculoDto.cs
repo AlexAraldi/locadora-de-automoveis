@@ -3,6 +3,7 @@
 public class VeiculoDto
 {
     public Guid Id { get; set; }
+    public string? Foto { get; set; }
     public string? Modelo { get; set; }
     public string? Marca { get; set; }
     public int Ano { get; set; }

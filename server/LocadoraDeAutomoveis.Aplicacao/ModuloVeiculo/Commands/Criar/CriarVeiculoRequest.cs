@@ -5,6 +5,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Criar;
 
 public class CriarVeiculoRequest : IRequest<object>
 {
+    public string? Foto { get; set; }
     public string? Modelo { get; set; }
     public string? Marca { get; set; }
     public int Ano { get; set; }

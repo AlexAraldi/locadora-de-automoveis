@@ -5,6 +5,7 @@ public class CriarVeiculoValidator : AbstractValidator<CriarVeiculoRequest>
 {
     public CriarVeiculoValidator()
     {
+        RuleFor(c => c.Foto).NotEmpty();
         RuleFor(x => x.Modelo).NotEmpty();
         RuleFor(x => x.Marca).NotEmpty();
         RuleFor(x => x.Placa).NotEmpty();

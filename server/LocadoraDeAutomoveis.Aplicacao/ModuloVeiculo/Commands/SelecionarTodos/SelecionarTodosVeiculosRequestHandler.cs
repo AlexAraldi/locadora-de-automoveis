@@ -20,6 +20,7 @@ public class SelecionarTodosVeiculosRequestHandler : IRequestHandler<SelecionarT
         return lista.Select(v => new VeiculoDto
         {
             Id = v.Id,
+            Foto = v.Foto,
             Modelo = v.Modelo,
             Marca = v.Marca,
             Ano = v.Ano,

@@ -500,6 +500,11 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
                     b.Property<Guid>("EmpresaId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Foto")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<int>("KmInicial")
                         .HasColumnType("int");
 

@@ -24,6 +24,7 @@ public class SelecionarVeiculoPorIdRequestHandler : IRequestHandler<SelecionarVe
         return new VeiculoDto
         {
             Id = v.Id,
+            Foto = v.Foto,
             Modelo = v.Modelo,
             Marca = v.Marca,
             Ano = v.Ano,

@@ -4,6 +4,7 @@ namespace LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 
 public class Veiculo : EntidadeBase<Veiculo>
 {
+    public string Foto { get; private set; }
     public string Modelo { get; private set; } = string.Empty;
     public string Marca { get; private set; } = string.Empty;
     public int Ano { get; private set; }
@@ -16,14 +17,17 @@ public class Veiculo : EntidadeBase<Veiculo>
     public Veiculo() { }
 
     public Veiculo(
+        string foto,
         string modelo,
         string marca,
         int ano,
         string placa,
         decimal quilometragem,
         TipoCombustivel combustivel)
+        
     {
-        Id = Guid.NewGuid();
+        Id = Guid.NewGuid(); 
+        Foto = foto;
         Modelo = modelo;
         Marca = marca;
         Ano = ano;
@@ -31,16 +35,19 @@ public class Veiculo : EntidadeBase<Veiculo>
         Quilometragem = quilometragem;
         Combustivel = combustivel;
         Ativo = true;
+       
     }
 
     public void Editar(
-        string modelo,
+        string foto,
+        string modelo,       
         string marca,
         int ano,
         string placa,
         decimal quilometragem,
         TipoCombustivel combustivel)
     {
+        Foto = foto;
         Modelo = modelo;
         Marca = marca;
         Ano = ano;

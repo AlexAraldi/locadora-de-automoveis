@@ -32,6 +32,7 @@ public class EditarVeiculoRequestHandler : IRequestHandler<EditarVeiculoRequest,
             return VeiculoErrorResults.PlacaJaRegistrada;
 
         veiculo.Editar(
+            request.Foto,
             request.Modelo,
             request.Marca,
             request.Ano,
