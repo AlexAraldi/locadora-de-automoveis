@@ -13,8 +13,7 @@ public class VeiculoConfiguration : IEntityTypeConfiguration<Veiculo>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Foto)
-            .IsRequired()
-            .HasMaxLength(100);
+            .IsRequired();
 
         builder.Property(x => x.Modelo)
             .IsRequired()

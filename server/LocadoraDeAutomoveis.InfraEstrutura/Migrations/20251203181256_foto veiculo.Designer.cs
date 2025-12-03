@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 {
     [DbContext(typeof(LocadoraDbContext))]
-    [Migration("20251203175841_adicionado foto veiculo")]
-    partial class adicionadofotoveiculo
+    [Migration("20251203181256_foto veiculo")]
+    partial class fotoveiculo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -505,8 +505,7 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 
                     b.Property<string>("Foto")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("KmInicial")
                         .HasColumnType("int");

@@ -502,8 +502,7 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 
                     b.Property<string>("Foto")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("KmInicial")
                         .HasColumnType("int");
