@@ -18,6 +18,53 @@ export const routes: Routes = [
     path: 'inicio',
     loadComponent: () => import('./components/inicio/inicio').then((m) => m.Inicio),
   },
+  {
+    path: 'grupo-automovel',
+    loadChildren: () =>
+      import('./components/grupo-automovel/grupo.routes').then((m) => m.grupoRoutes),
+  },
+  {
+    path: 'aluguel',
+    loadChildren: () => import('./components/alugueis/aluguel.routes').then((m) => m.aluguelRoutes),
+  },
+  {
+    path: 'cliente',
+    loadChildren: () => import('./components/clientes/cliente.routes').then((m) => m.clienteRoutes),
+  },
+  {
+    path: 'condutor',
+    loadChildren: () =>
+      import('./components/condutores/condutor.routes').then((m) => m.condutorRoutes),
+  },
+  {
+    path: 'configuracao',
+    loadChildren: () =>
+      import('./components/configuracoes/configuracao.routes').then((m) => m.configuracaoRoutes),
+  },
+  {
+    path: 'devolucao',
+    loadChildren: () =>
+      import('./components/devolucoes/devolucao.routes').then((m) => m.devolucaoRoutes),
+  },
+  {
+    path: 'funcionario',
+    loadChildren: () =>
+      import('./components/funcionarios/funcionario.routes').then((m) => m.funcionarioRoutes),
+  },
+  {
+    path: 'plano-cobranca',
+    loadChildren: () =>
+      import('./components/planos-cobranca/planos.routes').then((m) => m.planoRoutes),
+  },
+  {
+    path: 'taxa-servico',
+    loadChildren: () =>
+      import('./components/taxas-servicos/taxas.routes').then((m) => m.taxaRoutes),
+  },
+  {
+    path: 'veiculo',
+    loadChildren: () => import('./components/veiculos/veiculo.routes').then((m) => m.veiculoRoutes),
+  },
 ];
 
 export const appConfig: ApplicationConfig = {
