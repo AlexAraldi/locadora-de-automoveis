@@ -1,0 +1,215 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row justify content center align-items-center g-3 p-3">
+      <div class="col">
+        <h3>Alugue seu automóvel com a Rent a Car</h3>
+
+        <p class="mt-4 fs-6">Otimize o tempo entre Locações e Devoluções.</p>
+        <p class="mt-4 fs-6">Ganhe tempo para alugar mais.</p>
+
+        <mat-list class="fs-6">
+          <mat-list-item>
+            <mat-icon matListItemIcon>label_important</mat-icon>Gerencie sua frota com controle
+            total.
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>label_important</mat-icon>Utilize as ferramentas de gestão
+            disponíveis.
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>label_important</mat-icon>.Acompanhe o histórico de locações e
+            clientes.
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <div class="col-lg-4 d-flex align-items-center">
+        <img
+          src="/img/inicio.jpg"
+          alt="frota"
+          style="max-width: 350px; width: 100%; border-radius: 20px"
+        />
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="row g-3 my-2">
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/aluguel" class="card-hero" style="--hero-url: url('/img/aluguel.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Aluguéis</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/aluguel" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/cliente" class="card-hero" style="--hero-url: url('/img/cliente.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Usuários</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/cliente" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/condutor" class="card-hero" style="--hero-url: url('/img/condutor.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Clientes</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/condutor" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a
+        routerLink="/combustivel"
+        class="card-hero"
+        style="--hero-url: url('/img/combustivel.jpg')"
+      >
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Combustível</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/combustivel" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/devolucao" class="card-hero" style="--hero-url: url('/img/devolucao.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Devoluções</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/devolucao" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a
+        routerLink="/funcionario"
+        class="card-hero"
+        style="--hero-url: url('/img/funcionario.jpg')"
+      >
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Funcionários</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/funcionario" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/grupo-automovel" class="card-hero" style="--hero-url: url('/img/grupo.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Grupo de Automóveis</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/grupo-automovel" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/plano-cobranca" class="card-hero" style="--hero-url: url('/img/plano.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Planos</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/plano-cobranca" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/taxa-servico" class="card-hero" style="--hero-url: url('/img/servico.jpg')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Serviços</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/taxa-servico" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="col-lg-3 card-column">
+    <mat-card class="classroom-card">
+      <a routerLink="/veiculo" class="card-hero" style="--hero-url: url('/img/veiculo.png')">
+        <h3 class="card-hero__title">
+          <button class="hero-btn">Veículos</button>
+        </h3>
+      </a>
+      <mat-card-content></mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+        <a routerLink="/veiculo" mat-icon-button>
+          <mat-icon>arrow_outward</mat-icon>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
