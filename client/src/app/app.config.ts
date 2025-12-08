@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { provideRouter, Routes } from '@angular/router';
 import { provideNotifications } from './components/shared/notificacao-provider';
+import { provideHttpClient } from '@angular/common/http';
 
 export const routes: Routes = [
   {
@@ -54,12 +55,11 @@ export const routes: Routes = [
   {
     path: 'plano-cobranca',
     loadChildren: () =>
-      import('./components/planos-cobranca/planos.routes').then((m) => m.planoRoutes),
+      import('./components/planos-cobranca/plano.routes').then((m) => m.planoRoutes),
   },
   {
     path: 'taxa-servico',
-    loadChildren: () =>
-      import('./components/taxas-servicos/taxas.routes').then((m) => m.taxaRoutes),
+    loadChildren: () => import('./components/taxas-servicos/taxa.routes').then((m) => m.taxaRoutes),
   },
   {
     path: 'veiculo',
@@ -72,6 +72,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
+    provideHttpClient(),
 
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: DEFAULT_RESIZE_TIME, useValue: 'BRL' },
