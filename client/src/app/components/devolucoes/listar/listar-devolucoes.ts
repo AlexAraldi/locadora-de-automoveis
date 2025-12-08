@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { DevolucaoService } from '../devolucao.service';
 
 @Component({
   selector: 'app-listar-devolucoes',
-  imports: [],
-  templateUrl: './listar-devolucoes.html'
+  imports: [AsyncPipe],
+  templateUrl: './listar-devolucoes.html',
 })
 export class ListarDevolucoes {
-
+  protected readonly devolucaoService = inject(DevolucaoService);
+  protected readonly devolucoes$ = this.devolucaoService.selecionarTodos();
 }
