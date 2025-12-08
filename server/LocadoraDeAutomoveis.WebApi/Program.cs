@@ -3,7 +3,7 @@ using FluentValidation;
 using MediatR;
 
 
-// Autenticação
+// Autenticaï¿½ï¿½o
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAutenticacao.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Service;
@@ -13,7 +13,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Validators;
 // Banco de Dados
 using LocadoraDeAutomoveis.Infraestrutura.DataBase;
 
-// Funcionário
+// Funcionï¿½rio
 using LocadoraDeAutomoveis.Dominio.ModuloFuncionario;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloFuncionario.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.Criar;
@@ -26,7 +26,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloFuncionario.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloCliente;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloCliente.Repositories;
 
-// Veículo
+// Veï¿½culo
 using LocadoraDeAutomoveis.Dominio.ModuloVeiculo;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloVeiculo.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Criar;
@@ -35,7 +35,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloVeiculo.Commands.SelecionarTodos;
 
-// Grupo Automóvel
+// Grupo Automï¿½vel
 using LocadoraDeAutomoveis.Dominio.ModuloGrupoAutomovel;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloGrupoAutomovel.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloGrupoAutomovel.Commands.Criar;
@@ -53,12 +53,12 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCondutor.Commands.SelecionarTodos;
 
-// Configuração
+// Configuraï¿½ï¿½o
 using LocadoraDeAutomoveis.Dominio.ModuloConfiguracao;
 using LocadoraDeAutomoveis.Aplicacao.ModuloConfiguracao.Commands.Selecionar;
 
 
-// Plano de Cobrança
+// Plano de Cobranï¿½a
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloPlanoCobranca.Repositories;
 using LocadoraDeAutomoveis.Dominio.ModuloPlanoCobranca;
 using LocadoraDeAutomoveis.Aplicacao.ModuloPlanoCobranca.Commands.Criar;
@@ -76,14 +76,14 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloAluguel.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloAluguel;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloAluguel.Repositories;
 
-// Devolução
+// Devoluï¿½ï¿½o
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.Registrar;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloDevolucao.Commands.SelecionarTodos;
 using LocadoraDeAutomoveis.Dominio.ModuloDevolucao;
 using LocadoraDeAutomoveis.InfraEstrutura.ModuloDevolucao.Repositories;
 
-// Taxa Serviço
+// Taxa Serviï¿½o
 using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 using LocadoraDeAutomoveis.Infraestrutura.ModuloTaxaServico.Repositories;
 using LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.Criar;
@@ -105,9 +105,23 @@ using LocadoraDeAutomoveis.InfraEstrutura.ModuloConfiguracao.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 
 // ============================================================================
-// SERVIÇOS BÁSICOS
+// SERVIï¿½OS Bï¿½SICOS
 // ============================================================================
 builder.Services
     .AddControllers()
@@ -162,7 +176,7 @@ builder.Services.AddDbContext<LocadoraDbContext>(options =>
 );
 
 // ============================================================================
-// AUTENTICAÇÃO JWT
+// AUTENTICAï¿½ï¿½O JWT
 // ============================================================================
 
 builder.Services.AddScoped<ITenantProvider, IdentityTenantProvider>();
@@ -205,7 +219,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(AutenticarUsuarioRequest).Asse
 builder.Services.AddScoped<JwtService>();
 
 // ============================================================================
-// FUNCIONÁRIO
+// FUNCIONï¿½RIO
 // ============================================================================
 builder.Services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 builder.Services.AddScoped<CriarFuncionarioRequestHandler>();
@@ -215,7 +229,7 @@ builder.Services.AddScoped<SelecionarFuncionarioPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosFuncionariosRequestHandler>();
 
 // ============================================================================
-// CONFIGURAÇÃO
+// CONFIGURAï¿½ï¿½O
 // ============================================================================
 builder.Services.AddScoped<IConfiguracaoRepository, ConfiguracaoRepository>();
 builder.Services.AddScoped<CriarConfiguracaoRequestHandler>();
@@ -228,7 +242,7 @@ builder.Services.AddScoped<SelecionarConfiguracaoRequestHandler>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 // ============================================================================
-// VEÍCULO
+// VEï¿½CULO
 // ============================================================================
 builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddScoped<CriarVeiculoRequestHandler>();
@@ -238,7 +252,7 @@ builder.Services.AddScoped<SelecionarVeiculoPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosVeiculosRequestHandler>();
 
 // ============================================================================
-// GRUPO AUTOMÓVEL
+// GRUPO AUTOMï¿½VEL
 // ============================================================================
 builder.Services.AddScoped<IGrupoAutomovelRepository, GrupoAutomovelRepository>();
 builder.Services.AddScoped<CriarGrupoAutomovelRequestHandler>();
@@ -258,7 +272,7 @@ builder.Services.AddScoped<SelecionarCondutorPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosCondutoresRequestHandler>();
 
 // ============================================================================
-// PLANO DE COBRANÇA
+// PLANO DE COBRANï¿½A
 // ============================================================================
 builder.Services.AddScoped<IPlanoCobrancaRepository, PlanoCobrancaRepository>();
 builder.Services.AddScoped<CriarPlanoCobrancaRequestHandler>();
@@ -278,7 +292,7 @@ builder.Services.AddScoped<SelecionarAluguelPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodosAlugueisRequestHandler>();
 
 // ============================================================================
-// DEVOLUÇÃO
+// DEVOLUï¿½ï¿½O
 // ============================================================================
 builder.Services.AddScoped<IDevolucaoRepository, DevolucaoRepository>();
 builder.Services.AddScoped<RegistrarDevolucaoRequestHandler>();
@@ -286,7 +300,7 @@ builder.Services.AddScoped<SelecionarDevolucaoPorIdRequestHandler>();
 builder.Services.AddScoped<SelecionarTodasDevolucoesRequestHandler>();
 
 // ============================================================================
-// TAXA SERVIÇO
+// TAXA SERVIï¿½O
 // ============================================================================
 builder.Services.AddScoped<ITaxaServicoRepository, TaxaServicoRepository>();
 builder.Services.AddScoped<CriarTaxaServicoRequestHandler>();
@@ -306,6 +320,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
+
 
 // JWT Middleware
 app.UseAuthentication();
