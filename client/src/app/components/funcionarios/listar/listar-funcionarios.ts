@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FuncionarioService } from '../funcionario.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-listar-funcionarios',
-  imports: [],
-  templateUrl: './listar-funcionarios.html'
+  imports: [AsyncPipe],
+  templateUrl: './listar-funcionarios.html',
 })
 export class ListarFuncionarios {
-
+  protected readonly funcionarioService = inject(FuncionarioService);
+  protected readonly funcionarios$ = this.funcionarioService.selecionarTodos();
 }
