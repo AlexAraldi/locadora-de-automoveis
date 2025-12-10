@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: '',
+  apiUrl: 'https://locadoradeautomoveis-fqbmechnhza7btcy.brazilsouth-01.azurewebsites.net/',
 };
