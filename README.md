@@ -1,13 +1,14 @@
-
-![](https://i.imgur.com/LL1kPzz.mp4)
+![](https://i.imgur.com/wTY7bFY.png)
 
 # Locadora de Automóveis — Sistema de Gestão Web
 
 ## Visão Geral
+
 Este repositório contém um sistema completo para gestão de locadoras de veículos.  
 Inclui módulos de clientes, condutores, automóveis, aluguéis, devoluções, taxas, funcionários e multitenancy.
 
 O projeto é dividido em:
+
 - Backend em .NET
 - Frontend em Angular
 
@@ -16,6 +17,7 @@ O projeto é dividido em:
 ## Tecnologias Utilizadas
 
 ### Backend
+
 - .NET 8
 - ASP.NET Web API
 - Entity Framework Core
@@ -23,6 +25,7 @@ O projeto é dividido em:
 - JWT Authentication
 
 ### Frontend
+
 - Angular
 - Angular Material / Bootstrap
 - TypeScript
@@ -33,6 +36,7 @@ O projeto é dividido em:
 ## Funcionalidades
 
 ### Autenticação e Acesso
+
 - Registro de empresa
 - Login e Logout
 - Controle por perfis (Administrador e Funcionário)
@@ -41,6 +45,7 @@ O projeto é dividido em:
 ---
 
 ### Funcionários
+
 - Cadastro, edição e exclusão
 - Funcionário só edita seus próprios dados
 - Administrador gerencia demais funcionários
@@ -50,27 +55,32 @@ O projeto é dividido em:
 ### Grupos, Planos e Automóveis
 
 #### Grupos de Automóveis
+
 - Cadastro e edição de grupos
 - Exemplos: esportivo, utilitário, PCD, caminhonete
 
 #### Planos de Cobrança
+
 - Plano Diário
 - Plano Livre
 - Plano Controlado
 - Configuração de valores, km e excedentes
 
 #### Automóveis
+
 - Cadastro completo com foto
 - Vínculo ao grupo
 - Edição e exclusão bloqueadas quando há aluguel em aberto
 - Listagem com filtros por grupo
 
 #### Configurações
+
 - Definição dos preços de combustível
 
 ---
 
 ### Clientes e Condutores
+
 - Cadastro de Pessoa Física (PF)
 - Cadastro de Pessoa Jurídica (PJ)
 - PJ deve possuir um condutor vinculado
@@ -79,6 +89,7 @@ O projeto é dividido em:
 ---
 
 ### Taxas e Serviços
+
 - Cadastro de taxas fixas ou por dia
 - Utilização no aluguel
 
@@ -87,6 +98,7 @@ O projeto é dividido em:
 ### Aluguéis e Devoluções
 
 #### Aluguéis
+
 - Seleção de cliente, condutor e veículo
 - Definição do plano de cobrança
 - Adição de taxas e serviços
@@ -95,6 +107,7 @@ O projeto é dividido em:
 - Cálculo automático do valor
 
 #### Devolução
+
 - Registro de quilometragem
 - Nível de combustível
 - Multa por atraso (10%)
@@ -103,9 +116,11 @@ O projeto é dividido em:
 ---
 
 ## Multitenancy
+
 O sistema utiliza TenantId para isolar os dados de cada empresa (locadora).
 
 Garantias:
+
 - Cada empresa visualiza apenas seus próprios dados
 - Todas as consultas são filtradas automaticamente
 - Segurança reforçada por usuário autenticado
@@ -113,12 +128,12 @@ Garantias:
 ---
 
 ## Como Executar o Projeto
+
 ### Frontend
 
 - cd client
 - npm install
 - npm start
-
 
 ### Backend
 
@@ -130,6 +145,7 @@ Garantias:
 ## Estrutura do projeto
 
 ### /server
+
 - Controllers/
 - Application/
 - Domain/
@@ -137,11 +153,9 @@ Garantias:
 - Migrations/
 
 ### /client
+
 - src/
 - app/
 - components/
 - pages/
 - services/
-
-
-
