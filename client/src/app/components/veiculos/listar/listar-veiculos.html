@@ -1,5 +1,46 @@
 <section class="row justify-content-center">
-  <div class="cow-lg-8">
+  <div class="col">
     <h2>Listagem de Automóveis</h2>
+    <div class="row g-1 mt-3">
+      <a mat-flat-button class="col-lg-2" routerLink="criar">
+        <mat-icon>add</mat-icon>
+        Cadastrar
+      </a>
+    </div>
+    <hr class="my-3 border-muted/30" />
+    <div class="row g-3">
+      @for (veiculo of veiculos$ | async; track $index) {
+        <div class="col-lg-2">
+          <mat-card class="p-1">
+            <mat-card-header>
+              <mat-card-title>{{ veiculo.modelo }}</mat-card-title>
+              <mat-card-subtitle>{{ veiculo.marca }}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content class="text-sm">
+              Ano: {{ veiculo.ano }} <br />
+              Modelo: {{ veiculo.modelo }} <br />
+              Placa: {{ veiculo.placa }} <br />
+              Km: {{ veiculo.quilometragem }} <br />
+              Combustível: {{ veiculo.combustivel }} <br />
+              Foto: {{ veiculo.foto }}<br />
+              Marca: {{ veiculo.marca }} <br />
+              Grupo de Veículo: {{ veiculo.grupoVeiculo }} <br />
+              <mat-checkbox>Disponível: {{ veiculo.disponivel }} <br /></mat-checkbox>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <a [routerLink]="['editar', veiculo.id]" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </a>
+
+              <a [routerLink]="['excluir', veiculo.id]" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      }
+    </div>
   </div>
 </section>

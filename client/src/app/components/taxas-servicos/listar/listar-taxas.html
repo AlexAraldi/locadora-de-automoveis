@@ -1,5 +1,38 @@
 <section class="row justify-content-center">
-  <div class="cow-lg-8">
+  <div class="col">
     <h2>Listagem Taxas e Serviços</h2>
+    <div class="row g-1 mt-3">
+      <a mat-flat-button class="col-lg-2" routerLink="criar">
+        <mat-icon>add</mat-icon>
+        Cadastrar
+      </a>
+    </div>
+    <hr class="my-3 border-muted/30" />
+    <div class="row g-3">
+      @for (taxa of taxas$ | async; track $index) {
+        <div class="col-lg-2">
+          <mat-card class="p-1">
+            <mat-card-header>
+              <mat-card-title>{{ taxa.nome }}</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="text-sm">
+              Valor: {{ taxa.valor }}<br />
+              Tipo de Cálculo: {{ taxa.tipoCalculo }} <br />
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <a [routerLink]="['editar', taxa.id]" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </a>
+
+              <a [routerLink]="['excluir', taxa.id]" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      }
+    </div>
   </div>
 </section>
