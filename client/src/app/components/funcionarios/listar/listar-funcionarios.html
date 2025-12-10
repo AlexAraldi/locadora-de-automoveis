@@ -1,5 +1,42 @@
 <section class="row justify-content-center">
-  <div class="cow-lg-8">
+  <div class="col">
     <h2>Listagem de Funcionários</h2>
+
+    <div class="row g-1 mt-3">
+      <a mat-flat-button class="col-lg-2" routerLink="criar">
+        <mat-icon>add</mat-icon>
+        Cadastrar
+      </a>
+    </div>
+
+    <hr class="my-3 border-muted/30" />
+
+    <div class="row g-3">
+      @for (funcionario of funcionarios$ | async; track $index) {
+        <div class="col-lg-2">
+          <mat-card class="p-1">
+            <mat-card-header>
+              <mat-card-title>{{ funcionario.nome }}</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="text-sm">
+              Email: {{ funcionario.email }} <br />
+              Telefone: {{ funcionario.telefone }} <br />
+              Cargo: {{ funcionario.cargo }}
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <a [routerLink]="['editar', funcionario.id]" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </a>
+
+              <a [routerLink]="['excluir', funcionario.id]" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      }
+    </div>
   </div>
 </section>
