@@ -8,11 +8,13 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
     {
         private readonly IClienteRepository _repository;
         private readonly ITenantProvider _tenantProvider;
+        private readonly CriarClienteValidator _validator;
 
         public CriarClienteRequestHandler(IClienteRepository repository, ITenantProvider tenantProvider)
         {
             _repository = repository;
             _tenantProvider = tenantProvider;
+            _validator = new CriarClienteValidator();
         }
 
         public async Task<object> Handle(CriarClienteRequest request, CancellationToken cancellationToken)
@@ -35,7 +37,7 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Criar
             var cliente = new Cliente
             {
                 Id = Guid.NewGuid(),
-                EmpresaId = _tenantProvider.EmpresaId!.Value,  
+                EmpresaId = _tenantProvider.EmpresaId.Value,  
                 Tipo = (TipoCliente)request.Tipo,
                 Nome = request.Nome,
                 Email = request.Email,

@@ -27,7 +27,7 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             return Ok(resultado);
         }
 
-        [HttpPut("editar")]
+        [HttpPut("editar/{id}")]
         public async Task<IActionResult> Editar([FromBody] EditarFuncionarioRequest request)
         {
             var resultado = await _mediator.Send(request);
@@ -48,7 +48,7 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             return Ok(resultado);
         }
 
-        [HttpGet]
+        [HttpGet ("todos")]
         public async Task<IActionResult> SelecionarTodos()
         {
             var resultado = await _mediator.Send(new SelecionarTodosFuncionariosRequest());

@@ -134,32 +134,46 @@ builder.Services.AddEndpointsApiExplorer();
 // ============================================================================
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "LocadoraDeAutomoveis.WebApi", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Locadora de Veículos API", Version = "v1" });
+
+    c.MapType<TimeSpan>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "time-span",
+        Example = new Microsoft.OpenApi.Any.OpenApiString("00:00:00")
+    });
+
+    c.MapType<Guid>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Format = "guid",
+        Example = new Microsoft.OpenApi.Any.OpenApiString("00000000-0000-0000-0000-000000000000")
+    });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Informe: Bearer {seu token JWT}"
+        Name = "Authorization",
+        Description = "Informe o token JWT no padrão ",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
     {
+        new OpenApiSecurityScheme
         {
-            new OpenApiSecurityScheme
+            Reference = new OpenApiReference
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            }
+        },
+        []
+    }
+});
 });
 
 // ============================================================================
@@ -307,7 +321,7 @@ builder.Services.AddScoped<CriarTaxaServicoRequestHandler>();
 builder.Services.AddScoped<EditarTaxaServicoRequestHandler>();
 builder.Services.AddScoped<ExcluirTaxaServicoRequestHandler>();
 builder.Services.AddScoped<SelecionarTaxaServicoPorIdRequestHandler>();
-builder.Services.AddScoped<SelecionarTodasTaxasServicoRequestHandler>();
+builder.Services.AddScoped<SelecionarTodosTaxasServicoRequestHandler>();
 builder.Services.AddScoped<CriarTaxaServicoValidator>();
 builder.Services.AddScoped<EditarTaxaServicoValidator>();
 

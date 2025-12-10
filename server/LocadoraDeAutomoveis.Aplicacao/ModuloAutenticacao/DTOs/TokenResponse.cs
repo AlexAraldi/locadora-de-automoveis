@@ -1,8 +1,16 @@
-﻿namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.DTOs
+﻿using LocadoraDeAutomoveis.Dominio.ModuloAutenticacao;
+
+namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.DTOs
 {
-    public class TokenResponse
-    {
-        public string AccessToken { get; set; } = "";
-        public int ExpiresIn { get; set; }
-    }
+    public record AccessToken(
+        string Chave,
+        DateTime Expiracao,
+        UsuarioAutenticado UsuarioAutenticado
+    );
+
+    public record UsuarioAutenticado(
+        Guid Id,
+        string Email,
+        RoleUsuario Cargo
+    );
 }

@@ -4,12 +4,12 @@ using LocadoraDeAutomoveis.Dominio.ModuloTaxaServico;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.SelecionarTodos
 {
-    public class SelecionarTodasTaxasServicoRequestHandler : IRequestHandler<SelecionarTodasTaxasServicoRequest, List<TaxaServicoDto>>
+    public class SelecionarTodosTaxasServicoRequestHandler : IRequestHandler<SelecionarTodosTaxasServicoRequest, List<TaxaServicoDto>>
     {
         private readonly ITaxaServicoRepository _repo;
-        public SelecionarTodasTaxasServicoRequestHandler(ITaxaServicoRepository repo) => _repo = repo;
+        public SelecionarTodosTaxasServicoRequestHandler(ITaxaServicoRepository repo) => _repo = repo;
 
-        public async Task<List<TaxaServicoDto>> Handle(SelecionarTodasTaxasServicoRequest request, CancellationToken cancellationToken)
+        public async Task<List<TaxaServicoDto>> Handle(SelecionarTodosTaxasServicoRequest request, CancellationToken cancellationToken)
         {
             var taxas = await _repo.SelecionarTodosAsync();
             return taxas.Select(t => new TaxaServicoDto 

@@ -38,26 +38,23 @@ namespace LocadoraDeAutomoveis.WebApi.Controllers
             [HttpDelete("excluir/{id}")]
             public async Task<IActionResult> Excluir(Guid id)
             {
-                var request = new ExcluirCondutorRequest { Id = id };
-                var resultado = await _mediator.Send(request);
-                return Ok(resultado);
-            }
+                var result = await _mediator.Send(new ExcluirCondutorRequest { Id = id });
+                return Ok(result);  
+        }
 
             [HttpGet("{id}")]
             public async Task<IActionResult> SelecionarPorId(Guid id)
             {
-                var request = new SelecionarCondutorPorIdRequest { Id = id };
-                var resultado = await _mediator.Send(request);
-                return Ok(resultado);
-            }
+                var result = await _mediator.Send(new SelecionarCondutorPorIdRequest { Id = id });
+                return Ok(result);  
+        }
 
             [HttpGet("todos")]
             public async Task<IActionResult> SelecionarTodos()
             {
-                var request = new SelecionarTodosCondutoresRequest();
-                var resultado = await _mediator.Send(request);
-                return Ok(resultado);
-            }
+                var result = await _mediator.Send(new SelecionarTodosCondutoresRequest());
+                return Ok(result);
+        }
 
 
         }

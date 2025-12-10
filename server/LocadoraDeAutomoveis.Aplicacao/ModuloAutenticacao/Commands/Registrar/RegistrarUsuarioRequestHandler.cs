@@ -40,9 +40,12 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Registrar
             {
                 Id = Guid.NewGuid(),
                 Email = request.Email,
-                UserName = request.Email
+                UserName = request.Email,
+                EmpresaId = Guid.NewGuid()
 
             };
+            usuario.EmpresaId = usuario.Id;
+
             await _userManager.CreateAsync(usuario, request.Senha);
 
             var cargoStr = RoleUsuario.Empresa.ToString();

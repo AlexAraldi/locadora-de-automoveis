@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 {
     [DbContext(typeof(LocadoraDbContext))]
-    [Migration("20251203181256_foto veiculo")]
-    partial class fotoveiculo
+    [Migration("20251209202119_AddEmpresaIdToUsuario")]
+    partial class AddEmpresaIdToUsuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,6 +128,9 @@ namespace LocadoraDeAutomoveis.InfraEstrutura.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("EmpresaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

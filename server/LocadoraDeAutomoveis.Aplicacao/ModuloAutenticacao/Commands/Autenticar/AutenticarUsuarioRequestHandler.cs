@@ -32,23 +32,10 @@ namespace LocadoraDeAutomoveis.Aplicacao.ModuloAutenticacao.Commands.Autenticar
             var usuario = await _repository.BuscarPorEmail(request.Email);
 
             if (usuario == null)
-                return AutenticacaoErrorResults.UsuarioNaoEncontrado;
+                return AutenticacaoErrorResults.UsuarioNaoEncontrado;           
 
-           
-
-            var token = _jwtService.GerarToken(usuario);
-
-            var usuarioDto = new UsuarioAutenticadoDto
-            {
-                Id = usuario.Id,
-                
-            };
-
-            return new
-            {
-                Token = token,
-                Usuario = usuarioDto
-            };
+            var token = await _jwtService.GerarToken(usuario);
+            return token;            
         }
     }
 }

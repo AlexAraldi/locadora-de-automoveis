@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LocadoraDeAutomoveis.Aplicacao.ModuloTaxaServico.Commands.SelecionarTodos
 {
-    public class SelecionarTodasTaxasServicoRequest : IRequest<List<TaxaServicoDto>>
+    public class SelecionarTodosTaxasServicoRequest : IRequest<List<TaxaServicoDto>>
     {
     }
 }

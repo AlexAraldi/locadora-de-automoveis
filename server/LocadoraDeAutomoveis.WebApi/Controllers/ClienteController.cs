@@ -4,6 +4,7 @@ using LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.Excluir;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.SelecionarPorId;
 using LocadoraDeAutomoveis.Aplicacao.ModuloCliente.Commands.SelecionarTodos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraDeAutomoveis.WebApi.Controllers
