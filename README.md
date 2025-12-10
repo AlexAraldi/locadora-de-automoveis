@@ -1,4 +1,4 @@
-![](https://i.imgur.com/wTY7bFY.png)
+![](https://i.imgur.com/gSDfYMf.png)
 
 # Locadora de Automóveis — Sistema de Gestão Web
 
