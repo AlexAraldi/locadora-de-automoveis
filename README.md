@@ -1,4 +1,7 @@
-![](https://i.imgur.com/gSDfYMf.png)
+
+![](https://i.imgur.com/5zGZic7.gif)
+![5zGZic7 - Imgur](https://github.com/user-attachments/assets/d9eafeee-bab4-4385-b6dc-46afcdb3d4cb)
+
 
 # Locadora de Automóveis — Sistema de Gestão Web
 
